@@ -24,7 +24,10 @@ from pathlib import Path
 from typing import Optional
 
 try:
-    from capstone import Cs, CS_ARCH_ARM, CS_MODE_THUMB, CS_MODE_LITTLE_ENDIAN
+    from capstone import (
+        Cs, CS_ARCH_ARM, CS_MODE_THUMB, CS_MODE_ARM,
+        CS_MODE_LITTLE_ENDIAN,
+    )
 except ImportError:
     print("ERROR: capstone not installed. Run: pip install capstone")
     sys.exit(1)
@@ -118,56 +121,91 @@ class Function:
 
 def find_functions_thumb(rom_data: bytes, max_funcs: int = 50000) -> dict[int, Function]:
     """
-    Identify functions in THUMB code using heuristic patterns.
+    Identify functions using both ARM and THUMB heuristics.
 
     Strategy:
-    1. Look for PUSH {r4-r7, lr} patterns (function prologues)
-    2. Track BL (branch-with-link) targets as function entry points
-    3. Cross-reference to build a call graph
+    1. Scan for PUSH {r4-r7, lr} byte patterns in THUMB (0xB5xx)
+    2. Scan for STMDB SP!, {*, LR} patterns in ARM (0xE92Dxxxx)
+    3. Disassemble in chunks around detected prologues to find BL targets
+    4. Cross-reference to build a call graph
     """
-    md = Cs(CS_ARCH_ARM, CS_MODE_THUMB | CS_MODE_LITTLE_ENDIAN)
-    md.detail = True
-
     functions: dict[int, Function] = {}
     bl_targets: set[int] = set()
 
-    code_start = GBA_HEADER_SIZE
-    code_bytes = rom_data[code_start:]
-    base_addr = ROM_START + code_start
+    print(f"  ROM size: {len(rom_data):,} bytes")
 
-    print(f"  Scanning for functions from 0x{base_addr:08X}...")
-    print(f"  ROM size to scan: {len(code_bytes):,} bytes")
+    # --- Pass 1: THUMB PUSH {*, lr} byte patterns ---
+    # THUMB PUSH with LR has format: 1011 0101 xxxx xxxx = 0xB5xx
+    # The low byte is a bitmask of r0-r7, high byte is 0xB5
+    print(f"  Pass 1: Scanning for THUMB PUSH {{*, lr}} patterns...")
+    thumb_push_count = 0
+    for i in range(GBA_HEADER_SIZE, len(rom_data) - 1, 2):
+        if rom_data[i + 1] == 0xB5:  # THUMB PUSH {*, lr}
+            addr = ROM_START + i
+            functions[addr] = Function(
+                address=addr,
+                detection_method="thumb_push_lr",
+            )
+            thumb_push_count += 1
+            if thumb_push_count >= max_funcs:
+                break
+    print(f"  Found {thumb_push_count} THUMB function prologues")
 
-    # Pass 1: Find PUSH {*, lr} prologues and BL targets
-    push_count = 0
-    bl_count = 0
-
-    for insn in md.disasm(code_bytes, base_addr):
-        # Detect function prologues: push {r4-r7, lr}
-        if insn.mnemonic == "push" and "lr" in insn.op_str:
-            addr = insn.address
+    # --- Pass 2: ARM STMDB SP!, {*, LR} patterns ---
+    # ARM STMDB SP!, {regs, lr} = 0xE92D4xxx or 0xE92Dxxxx where bit 14 is set
+    print(f"  Pass 2: Scanning for ARM STMDB SP! patterns...")
+    arm_push_count = 0
+    for i in range(GBA_HEADER_SIZE, len(rom_data) - 3, 4):
+        word = struct.unpack_from("<I", rom_data, i)[0]
+        # E92D = STMDB SP! (push), and bit 14 (LR) should be set
+        if (word & 0xFFFF0000) == 0xE92D0000 and (word & 0x4000):
+            addr = ROM_START + i
             if addr not in functions:
                 functions[addr] = Function(
                     address=addr,
-                    detection_method="push_lr_prologue",
+                    detection_method="arm_stmdb_lr",
                 )
-                push_count += 1
+                arm_push_count += 1
+    print(f"  Found {arm_push_count} ARM function prologues")
 
-        # Detect BL (function call) targets
-        elif insn.mnemonic == "bl":
-            try:
-                target = int(insn.op_str.lstrip("#"), 0) if insn.op_str.startswith("#") else int(insn.op_str, 0)
-                if ROM_START <= target <= ROM_END:
-                    bl_targets.add(target)
-                    bl_count += 1
-            except (ValueError, TypeError):
-                pass
+    # --- Pass 3: Scan for BL (branch-with-link) in THUMB mode ---
+    # THUMB BL is a pair of 16-bit instructions: 0xF000-0xF7FF followed by 0xF800-0xFFFF
+    print(f"  Pass 3: Scanning for THUMB BL call targets...")
+    thumb_bl_count = 0
+    for i in range(GBA_HEADER_SIZE, len(rom_data) - 3, 2):
+        hi = struct.unpack_from("<H", rom_data, i)[0]
+        lo = struct.unpack_from("<H", rom_data, i + 2)[0]
+        if (hi & 0xF800) == 0xF000 and (lo & 0xF800) == 0xF800:
+            # Decode BL target
+            offset_hi = (hi & 0x07FF) << 12
+            offset_lo = (lo & 0x07FF) << 1
+            if offset_hi & 0x00400000:  # sign extend
+                offset_hi |= 0xFF800000
+            offset = (offset_hi | offset_lo)
+            # Target address = current_pc + 4 + offset
+            target = (ROM_START + i + 4 + offset) & 0xFFFFFFFF
+            if ROM_START <= target <= ROM_START + len(rom_data):
+                bl_targets.add(target)
+                thumb_bl_count += 1
 
-        if len(functions) >= max_funcs:
-            print(f"  WARNING: Hit function limit ({max_funcs}), stopping scan early")
-            break
+    # --- Pass 4: Scan for BL in ARM mode ---
+    print(f"  Pass 4: Scanning for ARM BL call targets...")
+    arm_bl_count = 0
+    for i in range(GBA_HEADER_SIZE, len(rom_data) - 3, 4):
+        word = struct.unpack_from("<I", rom_data, i)[0]
+        if (word & 0x0F000000) == 0x0B000000:  # BL instruction (cond=any)
+            offset = word & 0x00FFFFFF
+            if offset & 0x00800000:  # sign extend 24-bit
+                offset |= 0xFF000000
+            offset = offset << 2
+            target = (ROM_START + i + 8 + offset) & 0xFFFFFFFF
+            if ROM_START <= target <= ROM_START + len(rom_data):
+                bl_targets.add(target)
+                arm_bl_count += 1
 
-    # Pass 2: Add BL targets that weren't already found via PUSH
+    print(f"  Found {thumb_bl_count} THUMB BL calls, {arm_bl_count} ARM BL calls")
+
+    # Add BL targets not already found via PUSH
     new_from_bl = 0
     for target in bl_targets:
         if target not in functions:
@@ -177,8 +215,6 @@ def find_functions_thumb(rom_data: bytes, max_funcs: int = 50000) -> dict[int, F
             )
             new_from_bl += 1
 
-    print(f"  Found {push_count} functions via PUSH prologue")
-    print(f"  Found {bl_count} BL call instructions")
     print(f"  Added {new_from_bl} additional functions from BL targets")
     print(f"  Total unique functions: {len(functions)}")
 
