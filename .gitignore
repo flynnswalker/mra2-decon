@@ -1,0 +1,35 @@
+# ROM files -- never commit copyrighted game data
+rom/*.gba
+rom/*.bin
+rom/*.zip
+
+# Ghidra project files (large, regeneratable)
+*.gpr
+*.rep/
+ghidra_projects/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+
+# Analysis output (large, regeneratable)
+analysis/functions/*.json
+analysis/data_tables/*.json
+analysis/data_tables/*.csv
+analysis/structs/*.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+*.swp
+*.swo
+*~

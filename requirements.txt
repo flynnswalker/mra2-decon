@@ -1,0 +1,12 @@
+# MRA2-DECON dependencies
+# Core disassembly
+capstone>=5.0.0        # ARM/THUMB disassembly engine
+
+# Ghidra integration (requires Ghidra + JDK installed separately)
+pyhidra>=1.3.0         # Python interface to Ghidra's API
+
+# GBA-specific disassembly
+luvdis>=0.8.0          # Pure-Python GBA disassembler
+
+# Data analysis and output
+tabulate>=0.9.0        # Pretty-print tables

@@ -1,0 +1,109 @@
+{
+  "_meta": {
+    "description": "Known memory addresses for Monster Rancher Advance 2 (USA)",
+    "rom_serial": "AGB-A2OE-USA",
+    "rom_crc32": "0x1D695B1B",
+    "sources": [
+      "Japanese CodeBreaker codes (srwmxcords.nobody.jp)",
+      "English GameShark/AR codes (gamehacking.org)",
+      "English CodeBreaker codes (almarsguides.com)"
+    ],
+    "notes": "Addresses are for the USA version. JP version offsets may differ."
+  },
+  "global_state": {
+    "money": {
+      "address": "0x02002B48",
+      "size_bytes": 4,
+      "type": "uint32",
+      "description": "Player's current funds",
+      "max_value": 9999999,
+      "source": "JP CodeBreaker",
+      "confidence": "confirmed"
+    }
+  },
+  "active_monster_stats": {
+    "_notes": "All stat fields are 16-bit unsigned integers at 2-byte intervals. This strongly suggests they are contiguous fields in a monster struct. Max cheat value is 0x03E7 (999).",
+    "_base_address": "0x02006DB0",
+    "power": {
+      "address": "0x02006DB0",
+      "offset_from_base": "0x00",
+      "size_bytes": 2,
+      "type": "uint16",
+      "jp_name": "ちから",
+      "en_name": "POW",
+      "description": "Power / physical attack strength",
+      "source": "JP CodeBreaker",
+      "confidence": "confirmed"
+    },
+    "intelligence": {
+      "address": "0x02006DB2",
+      "offset_from_base": "0x02",
+      "size_bytes": 2,
+      "type": "uint16",
+      "jp_name": "かしこさ",
+      "en_name": "INT",
+      "description": "Intelligence / magic attack strength",
+      "source": "JP CodeBreaker",
+      "confidence": "confirmed"
+    },
+    "accuracy": {
+      "address": "0x02006DB4",
+      "offset_from_base": "0x04",
+      "size_bytes": 2,
+      "type": "uint16",
+      "jp_name": "めいちゅう",
+      "en_name": "SKI",
+      "description": "Accuracy / skill / hit rate",
+      "source": "JP CodeBreaker",
+      "confidence": "confirmed"
+    },
+    "evasion": {
+      "address": "0x02006DB6",
+      "offset_from_base": "0x06",
+      "size_bytes": 2,
+      "type": "uint16",
+      "jp_name": "かいひ",
+      "en_name": "SPD",
+      "description": "Evasion / speed / dodge rate",
+      "source": "JP CodeBreaker",
+      "confidence": "confirmed"
+    },
+    "defense": {
+      "address": "0x02006DB8",
+      "offset_from_base": "0x08",
+      "size_bytes": 2,
+      "type": "uint16",
+      "jp_name": "じょうぶさ",
+      "en_name": "DEF",
+      "description": "Defense / physical damage reduction",
+      "source": "JP CodeBreaker",
+      "confidence": "confirmed"
+    },
+    "life": {
+      "address": "0x02006DBA",
+      "offset_from_base": "0x0A",
+      "size_bytes": 2,
+      "type": "uint16",
+      "jp_name": "ライフ",
+      "en_name": "LIF",
+      "description": "Life / hit points / vitality",
+      "source": "JP CodeBreaker",
+      "confidence": "confirmed"
+    }
+  },
+  "unknown_regions": {
+    "_notes": "Regions to investigate for additional monster struct fields",
+    "monster_struct_pre_stats": {
+      "start": "0x02006D00",
+      "end": "0x02006DAF",
+      "description": "Region before known stat block -- likely contains breed ID, name, age, etc.",
+      "confidence": "speculative"
+    },
+    "monster_struct_post_stats": {
+      "start": "0x02006DBC",
+      "end": "0x02006E00",
+      "description": "Region after known stat block -- likely contains battle data, techniques, etc.",
+      "confidence": "speculative"
+    }
+  }
+}
