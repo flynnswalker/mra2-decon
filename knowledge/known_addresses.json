@@ -6,9 +6,148 @@
     "sources": [
       "Japanese CodeBreaker codes (srwmxcords.nobody.jp)",
       "English GameShark/AR codes (gamehacking.org)",
-      "English CodeBreaker codes (almarsguides.com)"
+      "English CodeBreaker codes (almarsguides.com)",
+      "Phase 2 cross-reference analysis"
     ],
-    "notes": "Addresses are for the USA version. JP version offsets may differ."
+    "notes": "Addresses are for the USA version. JP version offsets may differ.",
+    "last_updated": "Phase 2 deep analysis"
+  },
+  "rom_tables": {
+    "monster_type_table": {
+      "address": "0x081CACC8",
+      "header_size": 4,
+      "first_record": "0x081CACCC",
+      "record_size": 72,
+      "record_count": 512,
+      "breed_groups": 26,
+      "description": "Monster type definition table (stats, growth, traits)",
+      "index_function": "0x08020C5C",
+      "confidence": "confirmed",
+      "source": "Phase 2 xref analysis"
+    },
+    "breed_combo_table": {
+      "address": "0x081E88C0",
+      "rows": 30,
+      "columns": 40,
+      "entry_size": 2,
+      "row_stride": 80,
+      "description": "Maps (main_breed, sub_breed) -> monster record index",
+      "lookup_function": "0x08002B28",
+      "confidence": "confirmed",
+      "source": "Phase 2 code analysis"
+    },
+    "stat_growth_table": {
+      "address": "0x081C9F80",
+      "entry_size": 12,
+      "entry_count": 70,
+      "description": "Stat growth multipliers used by training system",
+      "reference_functions": ["0x08068810", "0x0806B06C", "0x0806B264"],
+      "confidence": "high",
+      "source": "Phase 2 xref analysis"
+    },
+    "variant_data_table": {
+      "address": "0x081D3CCC",
+      "offset_type": "uint32",
+      "description": "Per-monster variant extended data (sprites, abilities?)",
+      "resolver_function": "0x08002B9C",
+      "confidence": "confirmed",
+      "source": "Phase 2 code analysis"
+    },
+    "data_string_table": {
+      "address": "0x082006F8",
+      "offset_type": "uint16",
+      "description": "Indexed data/string table (length-prefixed entries)",
+      "resolver_function": "0x08002B88",
+      "confidence": "confirmed",
+      "source": "Phase 2 code analysis"
+    },
+    "tile_remap_table": {
+      "address": "0x0844386C",
+      "size": 256,
+      "description": "Maps encoded text bytes (0x80-0xFF) to VRAM tile indices",
+      "confidence": "confirmed",
+      "source": "Phase 2 text analysis"
+    },
+    "save_data_string": {
+      "address": "0x081CACA8",
+      "text": "Monster Farm Advance2 Save Data",
+      "encoding": "ASCII",
+      "confidence": "confirmed"
+    }
+  },
+  "rom_functions": {
+    "get_monster_record": {
+      "address": "0x08020C5C",
+      "params": "r0 = record index",
+      "returns": "r0 = pointer to 72-byte record",
+      "callers": 11,
+      "description": "Monster type table indexer: base + 4 + index * 72",
+      "confidence": "confirmed"
+    },
+    "combine_breed_ids": {
+      "address": "0x08002B28",
+      "params": "r0 = main breed (0-29), r1 = sub breed (0-39)",
+      "returns": "r0 = record index",
+      "description": "Breed combination lookup via 2D table at 0x081E88C0",
+      "confidence": "confirmed"
+    },
+    "field_accessor_read": {
+      "address": "0x080035BC",
+      "params": "r0 = base pointer, r1 = field index, r2 = array index",
+      "returns": "r0 = field value",
+      "description": "Generic game state field reader (wraps 0x08002240)",
+      "confidence": "confirmed"
+    },
+    "field_accessor_write": {
+      "address": "0x080035D0",
+      "params": "r0 = base pointer, r1 = field index, r2 = value, r3 = unknown",
+      "description": "Generic game state field writer",
+      "confidence": "high"
+    },
+    "core_state_accessor": {
+      "address": "0x08002240",
+      "description": "Core accessor with field type switch (12 types: byte, short, word, etc.)",
+      "confidence": "confirmed"
+    }
+  },
+  "wram_structures": {
+    "monster_struct": {
+      "base_address": "0x02006D48",
+      "references": 273,
+      "description": "Active monster data structure",
+      "known_offsets": {
+        "+0x68": { "address": "0x02006DB0", "name": "POW", "type": "uint16" },
+        "+0x6A": { "address": "0x02006DB2", "name": "INT", "type": "uint16" },
+        "+0x6C": { "address": "0x02006DB4", "name": "SKI", "type": "uint16" },
+        "+0x6E": { "address": "0x02006DB6", "name": "SPD", "type": "uint16" },
+        "+0x70": { "address": "0x02006DB8", "name": "DEF", "type": "uint16" },
+        "+0x72": { "address": "0x02006DBA", "name": "LIF", "type": "uint16" }
+      },
+      "confidence": "confirmed",
+      "source": "Cheat codes + Phase 2 xref analysis"
+    },
+    "player_state": {
+      "base_address": "0x02002B24",
+      "references": 457,
+      "description": "Player/game state structure",
+      "known_offsets": {
+        "+0x24": { "address": "0x02002B48", "name": "money", "type": "uint32", "max": 9999999 }
+      },
+      "confidence": "confirmed",
+      "source": "Cheat codes + Phase 2 xref analysis"
+    },
+    "ranch_monster_state": {
+      "entry_size": 152,
+      "description": "Per-monster state in ranch system (training, errantry)",
+      "known_offsets": {
+        "+0x8D": "flag byte (0 or 1)",
+        "+0x8F": "sub-state selector",
+        "+0x90": "training state",
+        "+0x92": "cycle counter (16-bit, compared against 0xC0=192)"
+      },
+      "confidence": "medium",
+      "source": "Phase 2 disassembly of stat table functions"
+    }
   },
   "global_state": {
     "money": {
@@ -18,18 +157,21 @@
       "description": "Player's current funds",
       "max_value": 9999999,
       "source": "JP CodeBreaker",
-      "confidence": "confirmed"
+      "confidence": "confirmed",
+      "struct_base": "0x02002B24",
+      "struct_offset": "0x24"
     }
   },
   "active_monster_stats": {
-    "_notes": "All stat fields are 16-bit unsigned integers at 2-byte intervals. This strongly suggests they are contiguous fields in a monster struct. Max cheat value is 0x03E7 (999).",
+    "_notes": "All stat fields are 16-bit unsigned at 2-byte intervals within the monster struct at 0x02006D48.",
     "_base_address": "0x02006DB0",
+    "_struct_base": "0x02006D48",
+    "_struct_offset": "0x68",
     "power": {
       "address": "0x02006DB0",
       "offset_from_base": "0x00",
       "size_bytes": 2,
       "type": "uint16",
-      "jp_name": "ちから",
       "en_name": "POW",
       "description": "Power / physical attack strength",
       "source": "JP CodeBreaker",
@@ -40,7 +182,6 @@
       "offset_from_base": "0x02",
       "size_bytes": 2,
       "type": "uint16",
-      "jp_name": "かしこさ",
       "en_name": "INT",
       "description": "Intelligence / magic attack strength",
       "source": "JP CodeBreaker",
@@ -51,7 +192,6 @@
       "offset_from_base": "0x04",
       "size_bytes": 2,
       "type": "uint16",
-      "jp_name": "めいちゅう",
       "en_name": "SKI",
       "description": "Accuracy / skill / hit rate",
       "source": "JP CodeBreaker",
@@ -62,7 +202,6 @@
       "offset_from_base": "0x06",
       "size_bytes": 2,
       "type": "uint16",
-      "jp_name": "かいひ",
       "en_name": "SPD",
       "description": "Evasion / speed / dodge rate",
       "source": "JP CodeBreaker",
@@ -73,7 +212,6 @@
       "offset_from_base": "0x08",
       "size_bytes": 2,
       "type": "uint16",
-      "jp_name": "じょうぶさ",
       "en_name": "DEF",
       "description": "Defense / physical damage reduction",
       "source": "JP CodeBreaker",
@@ -84,26 +222,10 @@
       "offset_from_base": "0x0A",
       "size_bytes": 2,
       "type": "uint16",
-      "jp_name": "ライフ",
       "en_name": "LIF",
       "description": "Life / hit points / vitality",
       "source": "JP CodeBreaker",
       "confidence": "confirmed"
-    }
-  },
-  "unknown_regions": {
-    "_notes": "Regions to investigate for additional monster struct fields",
-    "monster_struct_pre_stats": {
-      "start": "0x02006D00",
-      "end": "0x02006DAF",
-      "description": "Region before known stat block -- likely contains breed ID, name, age, etc.",
-      "confidence": "speculative"
-    },
-    "monster_struct_post_stats": {
-      "start": "0x02006DBC",
-      "end": "0x02006E00",
-      "description": "Region after known stat block -- likely contains battle data, techniques, etc.",
-      "confidence": "speculative"
     }
   }
 }

@@ -18,77 +18,84 @@ The CPU is an ARM7TDMI running at 16.78 MHz, using the ARMv4T instruction set
 | ROM | `0x08000000` | `0x09FFFFFF` | 32 MB max | Game Pak ROM |
 | SRAM | `0x0E000000` | `0x0E00FFFF` | 64 KB max | Game Pak SRAM (saves) |
 
-### Key Details for RE
+## MRA2 ROM Data Tables (Confirmed)
 
-- **EWRAM** (`0x02000000`): Where most game state lives. Monster data, inventory,
-  save state, etc. are all here. This is our primary target for data analysis.
-  2 wait-state access (slower than IWRAM).
+| Table | Address | Structure | Entries | Access Function |
+|-------|---------|-----------|---------|-----------------|
+| Monster type defs | `0x081CACC8` | 72 bytes/rec | 512 | `0x08020C5C` |
+| Breed combo matrix | `0x081E88C0` | 16-bit entries | 30x40 | `0x08002B28` |
+| Stat growth table | `0x081C9F80` | 12 bytes/entry | 70 | used by `0x08068810` |
+| Variant data | `0x081D3CCC` | 32-bit offsets | per-monster | `0x08002B9C` |
+| Indexed data | `0x082006F8` | 16-bit offsets | variable | `0x08002B88` |
+| Tile remap | `0x0844386C` | 256 bytes | 1 | text renderer |
+| Save string | `0x081CACA8` | ASCII | 1 | `0x08073110` |
 
-- **IWRAM** (`0x03000000`): Fast RAM used for performance-critical code and data.
-  The call stack lives here (grows down from `0x03007F00`). Some game logic may
-  run from IWRAM for speed.
+## MRA2 WRAM Structures
 
-- **ROM** (`0x08000000`): The game code and read-only data. When Ghidra loads the
-  ROM, the base address should be set to `0x08000000` so all code references
-  resolve correctly. Data tables (monster stats, breed info, text strings, etc.)
-  live here.
+### Player State Struct (base: `0x02002B24`, 457 references)
 
-- **I/O** (`0x04000000`): Hardware registers for display, sound, DMA, timers, etc.
-  Useful for understanding rendering and audio but not directly relevant to
-  game mechanics RE.
+The player/game state is the most-referenced WRAM structure. Fields are
+accessed via the generic `field_accessor` at `0x080035BC` with field indices.
 
-## MRA2 Known Memory Addresses
+| Offset | Address | Size | Name | Description |
+|--------|---------|------|------|-------------|
+| +0x24 | `0x02002B48` | 4 | Money | Player's funds (max 9,999,999) |
 
-### Global State (EWRAM)
+### Monster Struct (base: `0x02006D48`, 273 references)
 
-| Address | Size | Name | Description |
-|---------|------|------|-------------|
-| `0x02002B48` | 4 bytes | Money | Player's funds (max 9,999,999) |
+The active monster's data structure. Stats are at a fixed offset from base.
 
-### Active Monster Stats (EWRAM)
-
-The active (raised) monster's stats are stored as contiguous 16-bit unsigned
-integers starting at `0x02006DB0`. This block is part of a larger monster struct
-whose full layout is TBD.
-
-| Address | Offset | Size | Stat | JP Name | EN Abbrev |
-|---------|--------|------|------|---------|-----------|
-| `0x02006DB0` | +0x00 | 2 | Power | ちから | POW |
-| `0x02006DB2` | +0x02 | 2 | Intelligence | かしこさ | INT |
-| `0x02006DB4` | +0x04 | 2 | Accuracy | めいちゅう | SKI |
-| `0x02006DB6` | +0x06 | 2 | Evasion | かいひ | SPD |
-| `0x02006DB8` | +0x08 | 2 | Defense | じょうぶさ | DEF |
-| `0x02006DBA` | +0x0A | 2 | Life | ライフ | LIF |
+| Offset | Address | Size | Stat | Description |
+|--------|---------|------|------|-------------|
+| +0x68 | `0x02006DB0` | 2 | POW | Power / physical attack |
+| +0x6A | `0x02006DB2` | 2 | INT | Intelligence / magic attack |
+| +0x6C | `0x02006DB4` | 2 | SKI | Accuracy / skill |
+| +0x6E | `0x02006DB6` | 2 | SPD | Evasion / speed |
+| +0x70 | `0x02006DB8` | 2 | DEF | Defense |
+| +0x72 | `0x02006DBA` | 2 | LIF | Life / HP |
 
 **Max stat value:** 999 (0x03E7) based on cheat code values.
 
-### Investigation Targets
+### Ranch Monster State (per-monster, 152 bytes each)
+
+Discovered via training function analysis. Each active monster in the ranch
+system has a 152-byte state block accessed by functions at `0x08068810`,
+`0x0806B06C`, and `0x0806B264`.
+
+| Offset | Size | Description |
+|--------|------|-------------|
+| +0x8D | 1 | Training flag (0/1) |
+| +0x8F | 1 | Sub-state selector |
+| +0x90 | 1 | Training state type |
+| +0x92 | 2 | Cycle counter (max 0xC0 = 192) |
+
+## MRA2 Key Functions (Confirmed)
+
+| Address | Name | Description |
+|---------|------|-------------|
+| `0x08020C5C` | `get_monster_record` | Index -> 72-byte record pointer |
+| `0x08002B28` | `combine_breed_ids` | (main, sub) -> record index via 2D table |
+| `0x080035BC` | `field_accessor_read` | Generic game state field read |
+| `0x080035D0` | `field_accessor_write` | Generic game state field write |
+| `0x08002240` | `core_state_accessor` | Core accessor (12 field types, switch-based) |
+| `0x08002B88` | `resolve_string_16` | Index -> ROM pointer via 16-bit offset table |
+| `0x08002B9C` | `resolve_data_32` | Index -> ROM pointer via 32-bit offset table |
+| `0x08068810` | `training_update_1` | Training/ranch system update (uses stat growth table) |
+| `0x0806B06C` | `training_update_2` | Training/ranch system update (uses stat growth table) |
+| `0x0806B264` | `training_update_3` | Training/ranch system update (uses stat growth table) |
+
+## Investigation Targets
 
 The monster struct almost certainly extends well beyond the stat block.
-Fields we expect to find nearby (addresses TBD):
+Fields we expect to find at offsets from `0x02006D48`:
 
-- **Before stats (< `0x02006DB0`)**: Monster breed/species ID, sub-breed,
+- **Before stats (< +0x68)**: Monster breed/species ID, sub-breed,
   name string, birthday/age, form
-- **After stats (> `0x02006DBB`)**: Fatigue/stress, loyalty/spoil,
+- **After stats (> +0x73)**: Fatigue/stress, loyalty/spoil,
   nature/personality, techniques learned, battle HP, battle guts
 
-**Strategy**: Dump EWRAM `0x02006D00`-`0x02006E00` in mGBA while playing,
-correlate byte changes with in-game actions to map the full struct.
-
-## ROM Data Tables (TBD)
-
-These are expected to be in ROM (`0x08XXXXXX` range) but addresses not yet known:
-
-| Expected Table | Est. Entries | Est. Entry Size | Notes |
-|---------------|-------------|-----------------|-------|
-| Breed base stats | ~50 breeds | 20-40 bytes | Per-breed stat growth rates, caps |
-| Monster type table | ~400+ types | 10-20 bytes | Breed + sub-breed combinations |
-| Technique data | ~200+ techs | 10-16 bytes | Damage, accuracy, guts cost, range |
-| Item effects | ~50+ items | 8-12 bytes | Stat modifiers, healing amounts |
-| Training results | ~20 drills | 8-12 bytes | Which stats affected, gain ranges |
-| Tournament data | ~30+ tournaments | varies | Opponent definitions, rewards |
-| Text strings | varies | varies | Monster names, item names, dialogue |
-| Combination table | varies | varies | Breeding input/output mapping |
+**Strategy**: Use mGBA memory dump of `0x02006D00`-`0x02006E00` while
+playing to correlate byte changes with in-game actions.
 
 ## References
 

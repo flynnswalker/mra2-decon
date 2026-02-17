@@ -1,0 +1,91 @@
+{
+  "target": "0x081C9F80",
+  "target_region": "ROM",
+  "total_refs": 3,
+  "refs": [
+    {
+      "location": "0x08068822",
+      "location_int": 134645794,
+      "ref_type": "ldr_from_pool",
+      "containing_func": "0x08068810",
+      "context_asm": [
+        "     0x08068812: mov      r7, sl",
+        "     0x08068814: mov      r6, sb",
+        "     0x08068816: mov      r5, r8",
+        "     0x08068818: push     {r5, r6, r7}",
+        "     0x0806881A: sub      sp, #0xfc",
+        "     0x0806881C: adds     r4, r0, #0",
+        "     0x0806881E: lsls     r4, r4, #0x18",
+        "     0x08068820: lsrs     r4, r4, #0x18",
+        " >>> 0x08068822: ldr      r0, [pc, #0xf0]",
+        "     0x08068824: ldr      r1, [r0, #4]",
+        "     0x08068826: ldr      r0, [r0]",
+        "     0x08068828: add      r6, sp, #0xe4",
+        "     0x0806882A: str      r0, [r6]",
+        "     0x0806882C: str      r1, [r6, #4]",
+        "     0x0806882E: ldr      r1, [pc, #0xe8]",
+        "     0x08068830: add      r0, sp, #0xc",
+        "     0x08068832: movs     r2, #0x78",
+        "     0x08068834: bl       #0x81c7d0c",
+        "     0x08068838: add      r5, sp, #0x84",
+        "     0x0806883A: ldr      r1, [pc, #0xe0]"
+      ]
+    },
+    {
+      "location": "0x0806B07E",
+      "location_int": 134656126,
+      "ref_type": "ldr_from_pool",
+      "containing_func": "0x0806B06C",
+      "context_asm": [
+        "     0x0806B06E: mov      r7, sl",
+        "     0x0806B070: mov      r6, sb",
+        "     0x0806B072: mov      r5, r8",
+        "     0x0806B074: push     {r5, r6, r7}",
+        "     0x0806B076: sub      sp, #0x8c",
+        "     0x0806B078: adds     r4, r0, #0",
+        "     0x0806B07A: lsls     r4, r4, #0x18",
+        "     0x0806B07C: lsrs     r4, r4, #0x18",
+        " >>> 0x0806B07E: ldr      r0, [pc, #0xd0]",
+        "     0x0806B080: ldr      r1, [r0, #4]",
+        "     0x0806B082: ldr      r0, [r0]",
+        "     0x0806B084: str      r0, [sp, #0x74]",
+        "     0x0806B086: str      r1, [sp, #0x78]",
+        "     0x0806B088: ldr      r1, [pc, #0xc8]",
+        "     0x0806B08A: add      r0, sp, #0xc",
+        "     0x0806B08C: movs     r2, #0x3c",
+        "     0x0806B08E: bl       #0x81c7d0c",
+        "     0x0806B092: add      r2, sp, #0x48",
+        "     0x0806B094: adds     r1, r2, #0",
+        "     0x0806B096: ldr      r0, [pc, #0xc0]"
+      ]
+    },
+    {
+      "location": "0x0806B276",
+      "location_int": 134656630,
+      "ref_type": "ldr_from_pool",
+      "containing_func": "0x0806B264",
+      "context_asm": [
+        "     0x0806B266: mov      r7, sl",
+        "     0x0806B268: mov      r6, sb",
+        "     0x0806B26A: mov      r5, r8",
+        "     0x0806B26C: push     {r5, r6, r7}",
+        "     0x0806B26E: sub      sp, #0xe4",
+        "     0x0806B270: adds     r4, r0, #0",
+        "     0x0806B272: lsls     r4, r4, #0x18",
+        "     0x0806B274: lsrs     r4, r4, #0x18",
+        " >>> 0x0806B276: ldr      r0, [pc, #0xdc]",
+        "     0x0806B278: ldr      r1, [r0, #4]",
+        "     0x0806B27A: ldr      r0, [r0]",
+        "     0x0806B27C: add      r2, sp, #0xcc",
+        "     0x0806B27E: mov      r8, r2",
+        "     0x0806B280: mov      r3, r8",
+        "     0x0806B282: str      r0, [r3]",
+        "     0x0806B284: str      r1, [r3, #4]",
+        "     0x0806B286: ldr      r1, [pc, #0xd0]",
+        "     0x0806B288: add      r0, sp, #0xc",
+        "     0x0806B28A: movs     r2, #0x68",
+        "     0x0806B28C: bl       #0x81c7d0c"
+      ]
+    }
+  ]
+}

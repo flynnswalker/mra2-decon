@@ -1,0 +1,1983 @@
+{
+  "target": "0x02006D48",
+  "target_region": "EWRAM",
+  "total_refs": 273,
+  "refs": [
+    {
+      "location": "0x08073336",
+      "location_int": 134689590,
+      "ref_type": "ldr_from_pool",
+      "containing_func": "0x080732C0",
+      "context_asm": [
+        "     0x08073326: subs     r1, r1, r0",
+        "     0x08073328: lsls     r6, r1, #2",
+        "     0x0807332A: lsls     r2, r7, #0x10",
+        "     0x0807332C: asrs     r1, r2, #0x10",
+        "     0x0807332E: movs     r0, #1",
+        "     0x08073330: rsbs     r0, r0, #0",
+        "     0x08073332: cmp      r1, r0",
+        "     0x08073334: bne      #0x8073348",
+        " >>> 0x08073336: ldr      r0, [pc, #0xc]",
+        "     0x08073338: movs     r1, #3",
+        "     0x0807333A: movs     r2, #0",
+        "     0x0807333C: movs     r3, #1",
+        "     0x0807333E: bl       #0x804cb74",
+        "     0x08073342: b        #0x8073352",
+        "     0x08073344: ldr      r0, [r1, #0x54]",
+        "     0x08073346: lsls     r0, r0, #8",
+        "     0x08073348: lsrs     r1, r2, #0x10",
+        "     0x0807334A: movs     r0, #0",
+        "     0x0807334C: movs     r2, #1",
+        "     0x0807334E: bl       #0x804cbd0"
+      ]
+    },
+    {
+      "location": "0x080739DA",
+      "location_int": 134691290,
+      "ref_type": "ldr_from_pool",
+      "containing_func": "0x08073904",
+      "context_asm": [
+        "     0x080739CA: bne      #0x80739da",
+        "     0x080739CC: ldrh     r1, [r6, #4]",
+        "     0x080739CE: movs     r0, #0x3c",
+        "     0x080739D0: bl       #0x81c79d4",
+        "     0x080739D4: lsls     r1, r0, #4",
+        "     0x080739D6: subs     r1, r1, r0",
+        "     0x080739D8: lsls     r5, r1, #2",
+        " >>> 0x080739DA: ldr      r0, [pc, #0x90]",
+        "     0x080739DC: movs     r1, #2",
+        "     0x080739DE: movs     r2, #0",
+        "     0x080739E0: movs     r3, #1",
+        "     0x080739E2: bl       #0x804cb74",
+        "     0x080739E6: mov      r0, r8",
+        "     0x080739E8: lsls     r1, r0, #0x10",
+        "     0x080739EA: lsrs     r1, r1, #0x10",
+        "     0x080739EC: movs     r0, #1",
+        "     0x080739EE: movs     r2, #1",
+        "     0x080739F0: bl       #0x804cbd0",
+        "     0x080739F4: movs     r0, #2",
+        "     0x080739F6: bl       #0x804cc40"
+      ]
+    },
+    {
+      "location": "0x0811704E",
+      "location_int": 135360590,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0811709C",
+      "location_int": 135360668,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08117A8C",
+      "location_int": 135363212,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08117B54",
+      "location_int": 135363412,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08117DA4",
+      "location_int": 135364004,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08117E3E",
+      "location_int": 135364158,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08117ED8",
+      "location_int": 135364312,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08117F7E",
+      "location_int": 135364478,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08118022",
+      "location_int": 135364642,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x081180BE",
+      "location_int": 135364798,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08118158",
+      "location_int": 135364952,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08118914",
+      "location_int": 135366932,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x081189B2",
+      "location_int": 135367090,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08118A58",
+      "location_int": 135367256,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08118AFC",
+      "location_int": 135367420,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08118B98",
+      "location_int": 135367576,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08118C36",
+      "location_int": 135367734,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x081197B2",
+      "location_int": 135370674,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x081197E6",
+      "location_int": 135370726,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x081198D4",
+      "location_int": 135370964,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08119926",
+      "location_int": 135371046,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08119EAA",
+      "location_int": 135372458,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08119F5C",
+      "location_int": 135372636,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08119F9E",
+      "location_int": 135372702,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08119FF6",
+      "location_int": 135372790,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0811A070",
+      "location_int": 135372912,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0811A0FC",
+      "location_int": 135373052,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0811A19C",
+      "location_int": 135373212,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0811A1E2",
+      "location_int": 135373282,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0811B35C",
+      "location_int": 135377756,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0811B3AC",
+      "location_int": 135377836,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0811B3E6",
+      "location_int": 135377894,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0811B42C",
+      "location_int": 135377964,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0811B458",
+      "location_int": 135378008,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0811B980",
+      "location_int": 135379328,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0811BA2C",
+      "location_int": 135379500,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0811BACE",
+      "location_int": 135379662,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0811BB60",
+      "location_int": 135379808,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0811BC28",
+      "location_int": 135380008,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0811BD5E",
+      "location_int": 135380318,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0811BD82",
+      "location_int": 135380354,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0811BEB6",
+      "location_int": 135380662,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0811BF96",
+      "location_int": 135380886,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0811E402",
+      "location_int": 135390210,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0811E5AA",
+      "location_int": 135390634,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0811E7F8",
+      "location_int": 135391224,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08123626",
+      "location_int": 135411238,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08123D8C",
+      "location_int": 135413132,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08123E10",
+      "location_int": 135413264,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08123E4E",
+      "location_int": 135413326,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08123E98",
+      "location_int": 135413400,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08123ECE",
+      "location_int": 135413454,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08123F28",
+      "location_int": 135413544,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08123F80",
+      "location_int": 135413632,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08123FCC",
+      "location_int": 135413708,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x081242BC",
+      "location_int": 135414460,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x081242D6",
+      "location_int": 135414486,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0812438A",
+      "location_int": 135414666,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x081244AE",
+      "location_int": 135414958,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x081245B0",
+      "location_int": 135415216,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0812464E",
+      "location_int": 135415374,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08124700",
+      "location_int": 135415552,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08124760",
+      "location_int": 135415648,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08124816",
+      "location_int": 135415830,
+      "ref_type": "literal_pool_entry",
+      "containing_func": null,
+      "context_asm": [
+        "     0x08124806: cmp      r3, #0x24",
+        "     0x08124808: lsls     r0, r0, #8",
+        "     0x0812480A: lsls     r1, r0, #1",
+        "     0x0812480C: vcle.s32 d18, d16, #0"
+      ]
+    },
+    {
+      "location": "0x08124888",
+      "location_int": 135415944,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08124966",
+      "location_int": 135416166,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x081249CA",
+      "location_int": 135416266,
+      "ref_type": "literal_pool_entry",
+      "containing_func": null,
+      "context_asm": [
+        "     0x081249BA: cmp      r3, #0x24",
+        "     0x081249BC: lsls     r0, r0, #8",
+        "     0x081249BE: lsls     r1, r0, #1",
+        "     0x081249C0: vcle.s32 d18, d16, #0"
+      ]
+    },
+    {
+      "location": "0x08124A9E",
+      "location_int": 135416478,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08124B48",
+      "location_int": 135416648,
+      "ref_type": "literal_pool_entry",
+      "containing_func": null,
+      "context_asm": [
+        "     0x08124B38: cmp      r3, #0x24",
+        "     0x08124B3A: lsls     r0, r0, #8",
+        "     0x08124B3C: lsls     r1, r0, #1",
+        "     0x08124B3E: vcle.s32 d18, d16, #0"
+      ]
+    },
+    {
+      "location": "0x08124C36",
+      "location_int": 135416886,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08124D0E",
+      "location_int": 135417102,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08124D64",
+      "location_int": 135417188,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08124DA2",
+      "location_int": 135417250,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08124E06",
+      "location_int": 135417350,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08124EF4",
+      "location_int": 135417588,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08124FF2",
+      "location_int": 135417842,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08125056",
+      "location_int": 135417942,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0812526A",
+      "location_int": 135418474,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x081252E2",
+      "location_int": 135418594,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08125499",
+      "location_int": 135419033,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x081256BC",
+      "location_int": 135419580,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x081257B4",
+      "location_int": 135419828,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0812592E",
+      "location_int": 135420206,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x081259AE",
+      "location_int": 135420334,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08125BC8",
+      "location_int": 135420872,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08125C7C",
+      "location_int": 135421052,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08125E0E",
+      "location_int": 135421454,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08125F28",
+      "location_int": 135421736,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08126014",
+      "location_int": 135421972,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08126106",
+      "location_int": 135422214,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0812617C",
+      "location_int": 135422332,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x081261BE",
+      "location_int": 135422398,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08126302",
+      "location_int": 135422722,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08126362",
+      "location_int": 135422818,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08126432",
+      "location_int": 135423026,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x081268DC",
+      "location_int": 135424220,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08126936",
+      "location_int": 135424310,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08126AE4",
+      "location_int": 135424740,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08126BEE",
+      "location_int": 135425006,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08126DCC",
+      "location_int": 135425484,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08126E5E",
+      "location_int": 135425630,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08127202",
+      "location_int": 135426562,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x081273F2",
+      "location_int": 135427058,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x081274DC",
+      "location_int": 135427292,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x081278B0",
+      "location_int": 135428272,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x081278F6",
+      "location_int": 135428342,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08127972",
+      "location_int": 135428466,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0812EE0A",
+      "location_int": 135458314,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0812EFD4",
+      "location_int": 135458772,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0812F058",
+      "location_int": 135458904,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0812F0F2",
+      "location_int": 135459058,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0812F14C",
+      "location_int": 135459148,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0812F244",
+      "location_int": 135459396,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0812F294",
+      "location_int": 135459476,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0812F3B0",
+      "location_int": 135459760,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0812F42C",
+      "location_int": 135459884,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0812F4F0",
+      "location_int": 135460080,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x081337E8",
+      "location_int": 135477224,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08133816",
+      "location_int": 135477270,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08134406",
+      "location_int": 135480326,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08134440",
+      "location_int": 135480384,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08135016",
+      "location_int": 135483414,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08135134",
+      "location_int": 135483700,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08135256",
+      "location_int": 135483990,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08135C88",
+      "location_int": 135486600,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0813636A",
+      "location_int": 135488362,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x081363D8",
+      "location_int": 135488472,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08136498",
+      "location_int": 135488664,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x081365AA",
+      "location_int": 135488938,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x081365D6",
+      "location_int": 135488982,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08136646",
+      "location_int": 135489094,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x081366A2",
+      "location_int": 135489186,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x081367C0",
+      "location_int": 135489472,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0813690A",
+      "location_int": 135489802,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08136936",
+      "location_int": 135489846,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x081369EA",
+      "location_int": 135490026,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08136A26",
+      "location_int": 135490086,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08136A7A",
+      "location_int": 135490170,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08136A98",
+      "location_int": 135490200,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08136E26",
+      "location_int": 135491110,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x081413F2",
+      "location_int": 135533554,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08145D66",
+      "location_int": 135552358,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x081466F8",
+      "location_int": 135554808,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08147452",
+      "location_int": 135558226,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x081479AA",
+      "location_int": 135559594,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0814C896",
+      "location_int": 135579798,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0814CB68",
+      "location_int": 135580520,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0814CDAE",
+      "location_int": 135581102,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0814DDC2",
+      "location_int": 135585218,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0814DED2",
+      "location_int": 135585490,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0814F096",
+      "location_int": 135590038,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0814F0F8",
+      "location_int": 135590136,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0814FED4",
+      "location_int": 135593684,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0815035E",
+      "location_int": 135594846,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x081503E6",
+      "location_int": 135594982,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x081504F2",
+      "location_int": 135595250,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08150502",
+      "location_int": 135595266,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08152C93",
+      "location_int": 135605395,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08152E5F",
+      "location_int": 135605855,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08159493",
+      "location_int": 135632019,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x081606AB",
+      "location_int": 135661227,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08160DBB",
+      "location_int": 135663035,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08160F37",
+      "location_int": 135663415,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08160F73",
+      "location_int": 135663475,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08161DD7",
+      "location_int": 135667159,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x081650BA",
+      "location_int": 135680186,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0816A880",
+      "location_int": 135702656,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0816B24A",
+      "location_int": 135705162,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0816D7C4",
+      "location_int": 135714756,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0816DFFC",
+      "location_int": 135716860,
+      "ref_type": "literal_pool_entry",
+      "containing_func": null,
+      "context_asm": [
+        "     0x0816DFEC: cmp      r3, #0x24",
+        "     0x0816DFEE: lsls     r0, r0, #8",
+        "     0x0816DFF0: lsls     r1, r0, #1"
+      ]
+    },
+    {
+      "location": "0x0816E50E",
+      "location_int": 135718158,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0816E598",
+      "location_int": 135718296,
+      "ref_type": "literal_pool_entry",
+      "containing_func": null,
+      "context_asm": [
+        "     0x0816E588: movs     r7, r3",
+        "     0x0816E58A: movs     r0, r5",
+        "     0x0816E58C: lsls     r1, r0, #1"
+      ]
+    },
+    {
+      "location": "0x0816E9E6",
+      "location_int": 135719398,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0816EA0C",
+      "location_int": 135719436,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0816EF50",
+      "location_int": 135720784,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0816F02E",
+      "location_int": 135721006,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0816F396",
+      "location_int": 135721878,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08170294",
+      "location_int": 135725716,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x081702AE",
+      "location_int": 135725742,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0817476C",
+      "location_int": 135743340,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08174AB8",
+      "location_int": 135744184,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0817566C",
+      "location_int": 135747180,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0817CAB4",
+      "location_int": 135776948,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0817CAEA",
+      "location_int": 135777002,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0817D7F8",
+      "location_int": 135780344,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0817D8F6",
+      "location_int": 135780598,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0817DD60",
+      "location_int": 135781728,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0817DDE6",
+      "location_int": 135781862,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0817E96C",
+      "location_int": 135784812,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0817EF86",
+      "location_int": 135786374,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x081847F8",
+      "location_int": 135809016,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x081848B0",
+      "location_int": 135809200,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0818493C",
+      "location_int": 135809340,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08184E2A",
+      "location_int": 135810602,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08184E7C",
+      "location_int": 135810684,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08185F14",
+      "location_int": 135814932,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08185F6A",
+      "location_int": 135815018,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0818603C",
+      "location_int": 135815228,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x081862FE",
+      "location_int": 135815934,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x081863AC",
+      "location_int": 135816108,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0818640A",
+      "location_int": 135816202,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x081865F8",
+      "location_int": 135816696,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0818662E",
+      "location_int": 135816750,
+      "ref_type": "literal_pool_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08186D28",
+      "location_int": 135818536,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08186E24",
+      "location_int": 135818788,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08186E82",
+      "location_int": 135818882,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08186F26",
+      "location_int": 135819046,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08187232",
+      "location_int": 135819826,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08187384",
+      "location_int": 135820164,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0818776C",
+      "location_int": 135821164,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08187B50",
+      "location_int": 135822160,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08187F34",
+      "location_int": 135823156,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0818831C",
+      "location_int": 135824156,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08188704",
+      "location_int": 135825156,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08188F66",
+      "location_int": 135827302,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08188FAA",
+      "location_int": 135827370,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08188FCC",
+      "location_int": 135827404,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08189054",
+      "location_int": 135827540,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0818B39E",
+      "location_int": 135836574,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0818BC4E",
+      "location_int": 135838798,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0818C58A",
+      "location_int": 135841162,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0818C66E",
+      "location_int": 135841390,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0818D530",
+      "location_int": 135845168,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08194330",
+      "location_int": 135873328,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08195D82",
+      "location_int": 135880066,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08195DBE",
+      "location_int": 135880126,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08195FDE",
+      "location_int": 135880670,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08196032",
+      "location_int": 135880754,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08196168",
+      "location_int": 135881064,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x081961CA",
+      "location_int": 135881162,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08196968",
+      "location_int": 135883112,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x081975BA",
+      "location_int": 135886266,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08197B3A",
+      "location_int": 135887674,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08197B80",
+      "location_int": 135887744,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08197D1A",
+      "location_int": 135888154,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08197D46",
+      "location_int": 135888198,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08197DF2",
+      "location_int": 135888370,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08197F8E",
+      "location_int": 135888782,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08197FCE",
+      "location_int": 135888846,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08198088",
+      "location_int": 135889032,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x081980E8",
+      "location_int": 135889128,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08198182",
+      "location_int": 135889282,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x081981C8",
+      "location_int": 135889352,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08198394",
+      "location_int": 135889812,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08198420",
+      "location_int": 135889952,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x081984DC",
+      "location_int": 135890140,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08198582",
+      "location_int": 135890306,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0819881C",
+      "location_int": 135890972,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08198828",
+      "location_int": 135890984,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08198854",
+      "location_int": 135891028,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x08198920",
+      "location_int": 135891232,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0819A2FA",
+      "location_int": 135897850,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0819A554",
+      "location_int": 135898452,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0819A6EC",
+      "location_int": 135898860,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0819A792",
+      "location_int": 135899026,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0819B1E0",
+      "location_int": 135901664,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0819B292",
+      "location_int": 135901842,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0819B3B6",
+      "location_int": 135902134,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0819B4AA",
+      "location_int": 135902378,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0819B5A0",
+      "location_int": 135902624,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0819BF06",
+      "location_int": 135905030,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0819BFB8",
+      "location_int": 135905208,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0819C0B4",
+      "location_int": 135905460,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0819C19A",
+      "location_int": 135905690,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0819C290",
+      "location_int": 135905936,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0819CFE8",
+      "location_int": 135909352,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0819D062",
+      "location_int": 135909474,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0819D12A",
+      "location_int": 135909674,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0819D39C",
+      "location_int": 135910300,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0819D576",
+      "location_int": 135910774,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    },
+    {
+      "location": "0x0819D758",
+      "location_int": 135911256,
+      "ref_type": "pointer_table_entry",
+      "containing_func": null,
+      "context_asm": []
+    }
+  ]
+}

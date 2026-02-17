@@ -1,0 +1,35 @@
+{
+  "target": "0x081CACC8",
+  "target_region": "ROM",
+  "total_refs": 1,
+  "refs": [
+    {
+      "location": "0x08020C5E",
+      "location_int": 134351966,
+      "ref_type": "ldr_from_pool",
+      "containing_func": "0x08020BA0",
+      "context_asm": [
+        "     0x08020C4E: mov      r8, r3",
+        "     0x08020C50: pop      {r4, r5, r6}",
+        "     0x08020C52: pop      {r0}",
+        "     0x08020C54: bx       r0",
+        "     0x08020C56: movs     r0, r0",
+        "     0x08020C58: adr      r3, #0x260",
+        "     0x08020C5A: lsls     r0, r0, #8",
+        "     0x08020C5C: adds     r2, r0, #0",
+        " >>> 0x08020C5E: ldr      r1, [pc, #0x10]",
+        "     0x08020C60: ldr      r0, [r1]",
+        "     0x08020C62: adds     r0, r0, r1",
+        "     0x08020C64: lsls     r1, r2, #3",
+        "     0x08020C66: adds     r1, r1, r2",
+        "     0x08020C68: lsls     r1, r1, #3",
+        "     0x08020C6A: adds     r0, r0, r1",
+        "     0x08020C6C: bx       lr",
+        "     0x08020C6E: movs     r0, r0",
+        "     0x08020C70: add      r4, sp, #0x320",
+        "     0x08020C72: lsrs     r4, r3, #0x20",
+        "     0x08020C74: push     {r4, r5, lr}"
+      ]
+    }
+  ]
+}
