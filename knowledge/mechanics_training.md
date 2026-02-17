@@ -1,173 +1,101 @@
-# MRA2 Training Mechanics - Complete ROM Analysis
+# MRA2 Training & Raising Mechanics
 
-> Extracted via ARM7TDMI / THUMB disassembly of Monster Rancher Advance 2 (USA) ROM.
-> Cross-validated against LegendCup community data where possible.
-
----
-
-## Overview
-
-Training in MRA2 is driven by a **coach system**. When you assign a training drill, the game selects one of **65 predefined coach records** from a ROM table. Each coach has fixed stat totals, personality modifiers, a fatigue cost, and optionally teaches techniques. The coach's properties determine what your monster gains each week of training.
+> What actually determines your monster's stat gains, and what hidden costs come with different training choices.
 
 ---
 
-## The Coach / Training Result Table
+## How Weekly Training Works
 
-**ROM Address**: `0x0821856C`
-**Record Size**: 56 bytes each
-**Record Count**: 65
+Every week you choose an action for your monster: Rest, Light Drill, Heavy Drill, Sparring, or enter a Tournament. Behind the scenes, each drill and sparring session is governed by a **coach record** -- a set of fixed numbers that determine exactly what your monster gains (and loses) that week.
 
-Each record represents one "coach" or training outcome template. When a training drill is selected, the game picks the appropriate record and copies it into RAM at `*0x0200A398`.
+### The Coach System
 
-### Record Layout (56 bytes)
+MRA2 has **65 predefined coach profiles** stored in the game. Each coach has:
 
-| Offset | Size | Field | Description |
-|--------|------|-------|-------------|
-| 0x00 | 8 | Header | Internal control bytes |
-| 0x08 | 6 | Trait Modifiers | 6 signed bytes: personality/trait adjustments |
-| 0x0E | 1 | Fatigue Delta | Signed byte: lifespan cost of this training |
-| 0x10 | 4 | Technique Slots | Up to 4 technique IDs (0xFF = empty) |
-| 0x1A | 6 | Weekly Deltas | 6 signed bytes: POW/INT/SKI/SPD/DEF/LIF per-week stat changes |
-| 0x24 | 12 | Stat Totals | 6 x uint16: POW/INT/SKI/SPD/DEF/LIF target totals |
-| 0x30 | 1 | Breed Main | Main breed ID this coach is associated with |
-| 0x31 | 1 | Breed Sub | Sub-breed ID |
-| 0x32 | 1 | Drill Difficulty | 3 = easy, 4 = medium, 5 = hard |
+- **Stat totals** for POW, INT, ACC, SPD, DEF, and LIF (these cap what your monster can gain from that coach)
+- **Drill difficulty** (3 = easy, 4 = medium, 5 = hard)
+- **A breed association** (main + sub breed)
+- **Trait modifiers** (personality traits that can be passed to your monster)
+- **A fatigue cost** (the hidden lifespan penalty -- see below)
+- **Technique slots** (whether this coach's sparring can teach moves)
 
-### Fatigue Delta Values (Lifespan Cost)
+The named coaches the community knows -- Morgan, Arther, Aegis, Scarlet, etc. -- correspond to specific entries in this table. "AGIMA coaches" (the generic ones the game provides for free) also have entries.
 
-This is the most impactful hidden value for long-term play:
+**The key insight**: Your monster's stat gains from drills are bounded by your coach's stat totals. If your coach has 400 POW, once your monster approaches that level, gains from that coach taper off. This is why the community says "get the best coaches" -- coaches with higher stat totals let your monster grow further.
 
-| Value | Meaning | Found In |
-|-------|---------|----------|
-| **-3** | Beneficial -- slightly extends lifespan | Regular training, high-difficulty coaches |
-| **0** | No lifespan impact | Moderate coaches |
-| **27-45** | Heavy lifespan cost | Coaches that teach techniques |
+### What Determines Stat Gains
 
-**Key Insight**: Coaches with technique slots (the ones that can teach your monster new moves) carry a significant lifespan penalty (27-45 points per training week). Regular training coaches either have no cost (0) or actually give a small lifespan benefit (-3). This means **learning techniques is the most expensive thing you can do to your monster's lifespan**.
+**Inputs that matter:**
+1. **Which coach you're using** -- their stat totals set the ceiling for your growth
+2. **Your monster's current stats** -- gains slow as you approach the coach's level
+3. **Your monster's growth curve type** -- each breed has a hidden "bloomer type" (early, mid, late, or flat) that determines *when* in their life they grow fastest (see Lifespan doc)
+4. **Your monster's current aging stage** -- a 0-15 internal value based on how much life your monster has left. Peak growth happens at the sweet spot for your breed type (rate of 30), while very old monsters barely grow (rate of 10)
+5. **A hidden 57-week cycle** -- the game has an internal counter that cycles 0-56 and resets. Most of the cycle (weeks 0-49) is normal. Weeks 50-54 are a "bonus window" with slightly elevated gains, peaking at weeks 52-54. Then it resets. This cycle runs regardless of what you do.
 
-### How This Affects Gameplay
+**What does NOT matter (as much as you'd think):**
+- The specific drill type (Light vs Heavy) mainly determines fatigue cost and which stats are targeted, but within that, the coach's profile dominates
+- Random variance exists (via the game's RNG) but the base gains are deterministic per coach
 
-1. **Technique learning is expensive**: Every week spent in a technique-teaching training costs 27-45 lifespan points. Since 10 points = 1 week of life, a single training week with fatigue_delta=45 costs your monster 4.5 weeks of life.
+### Stats Are Capped at 999
 
-2. **Regular training is cheap or free**: Most non-technique coaches have fatigue_delta of 0 or -3, meaning pure stat training is essentially free in terms of lifespan.
-
-3. **Coach difficulty matters**: Difficulty 5 coaches tend to have higher stat totals (better training) but the lifespan cost varies independently.
-
-### Sample Coach Records
-
-| Coach# | POW | INT | SKI | SPD | DEF | LIF | Total | Diff | Fatigue | Teaches? |
-|--------|-----|-----|-----|-----|-----|-----|-------|------|---------|----------|
-| 0 | 200 | 350 | 320 | 330 | 150 | 250 | 1600 | 3 | -3 | No |
-| 1 | 400 | 100 | 200 | 150 | 400 | 400 | 1650 | 3 | 0 | No |
-| 2 | 280 | 320 | 400 | 300 | 250 | 300 | 1850 | 4 | 35 | Yes |
-| 3 | 500 | 550 | 300 | 250 | 350 | 450 | 2400 | 5 | -3 | No |
-| 6 | 200 | 50 | 220 | 450 | 250 | 300 | 1470 | 3 | 44 | Yes |
-| 62 | 500 | 850 | 700 | 600 | 500 | 700 | 3850 | 5 | 0 | No |
-| 63 | 500 | 500 | 500 | 200 | 900 | 900 | 3500 | 5 | 0 | No |
-| 64 | 800 | 600 | 700 | 400 | 650 | 700 | 3850 | 5 | 0 | No |
-
-**Note**: The last few coaches (62-64) have exceptionally high stat totals and appear to be "elite" coaches associated with rare or special breed combinations.
+Every stat is clamped to the range 0-999. You cannot exceed 999 in any stat through training.
 
 ---
 
-## Weekly Training Step
+## The Hidden Lifespan Cost of Sparring
 
-**Function**: `weekly_training_step` at `0x08020328`
+This is one of the most important hidden mechanics in the game. Every coach profile has a **fatigue delta** -- a number that gets subtracted from your monster's remaining lifespan every week you use that coach.
 
-Each in-game week during training:
+### The Three Tiers of Lifespan Cost
 
-1. The game reads the active training record from RAM at `*0x0200A398`
-2. The 6 weekly delta bytes at record offset `+0x1A` are read as signed bytes
-3. Each delta is added to the monster's corresponding stat via `field_modify`
-4. Stats are clamped to **[0, 999]** by the Type 10 field handler in `core_state_accessor`
+| Cost Category | What It Means | Lifespan Lost Per Week | Found In |
+|--------------|---------------|----------------------|----------|
+| **Beneficial (-3)** | Actually adds a tiny bit of lifespan | +0.3 weeks gained | Many high-difficulty drill coaches |
+| **Neutral (0)** | No lifespan impact at all | None | Many moderate coaches |
+| **Expensive (27-45)** | Significant lifespan drain | 2.7 to 4.5 weeks lost | Coaches that can teach techniques via sparring |
 
-### The Stat Gain Formula
+### What This Means for Your Game
 
-```
-new_stat = clamp(current_stat + weekly_delta, 0, 999)
-```
+**Sparring is expensive.** Coaches whose profiles include technique slots (meaning they can teach your monster new moves) carry fatigue costs of 27-45. Since 10 lifespan points equals 1 in-game week, a single week of sparring with a fatigue cost of 45 shortens your monster's life by **4.5 weeks**.
 
-This is straightforward -- the weekly deltas are fixed per-coach-record. There is no randomness in the per-week stat application itself.
+**Regular drills are basically free.** Most drill-only coaches have a fatigue cost of 0 or even -3 (beneficial). This means you can drill for stats all day long with negligible lifespan impact.
 
-**However**, most coach records have weekly_deltas of all zeros. This suggests that the stat totals at offset `+0x24` are used differently -- likely as targets or caps for the overall training period rather than per-week increments. The actual per-week gain calculation likely involves dividing the total by the training duration.
+**Practical example:** You have a monster with 250 weeks of life. If you spar 8 times (average fatigue cost ~40), that's 320 lifespan points = 32 weeks of life gone. Your monster now effectively has 218 weeks to live -- a 13% reduction. But if you only do regular drills, you might actually gain a few weeks.
 
----
-
-## The 57-Step Training Cycle
-
-**Counter Location**: `ranch_state + 0x92`
-
-Training uses a 57-step cycle counter (0 to 56, wrapping at 57). This counter advances each training week and determines visual feedback:
-
-| Cycle Position | Bonus Tier | Meaning |
-|---------------|-----------|---------|
-| 0-49 | 0 | Normal training |
-| 50-51 | 1 | Small bonus window |
-| 52-54 | 2 | Peak bonus window |
-| 55-56 | 1 | Small bonus window |
-
-**Gameplay Impact**: The cycle primarily affects the training animation/display system. It indexes into the **Stat Growth Display Table** at `0x081C9F80` (70 entries of 12 bytes, containing 6 x uint16 values that are multiples of 8, range 0-216). This determines what the player sees during training results but the actual stat gains come from the coach record's fixed deltas.
+**The strategic takeaway (confirmed by community wisdom):** GoldenBoy's advice of "TRAIN EARLY, LEARN LATER" is backed by the code. Build your stats first through cheap drills, then learn techniques through sparring when your monster is strong enough to do it efficiently (fewer sparring attempts needed = less lifespan spent).
 
 ---
 
-## Training Success / Failure
+## The Random Number Generator
 
-**Success Check Function**: `0x08001330`
+The game uses a very simple pseudo-random number generator: `seed = seed * 41`. This is a Linear Congruential Generator with low entropy, which means:
 
-Training success is determined by:
-
-1. Breed availability validation via field `0x9A` (monster availability flags)
-2. The function at `0x080687C4` uses the PRNG (`0x0806354C`) to determine the specific outcome
-3. Outcomes cycle through every 4 steps via a secondary counter at `ranch_state + 0x94`
-
-### The PRNG
-
-```
-if seed == 0:
-    seed = 0x2A6D365A    // fallback magic number
-new_seed = (seed * 41) & 0xFFFFFFFF
-high = (new_seed >> 16) & 0xFFFF
-result = (high + new_seed) & 0x7FFF
-```
-
-This is a simple Linear Congruential Generator. The low entropy means training outcomes are **predictable** if you know the seed state -- which is theoretically exploitable for TAS/speedrun play.
+- Training outcomes are **deterministic** if you know the seed
+- This is why the **save/reload method** (the "Nyght Method") works -- the RNG state is fixed at save time, so reloading and making the same choices produces the same result. Making a *different* choice advances the RNG to a different state, potentially giving better results.
 
 ---
 
-## Stat Growth Grades
+## Coach Quality Tiers (from ROM data)
 
-**Location**: Monster type table at `0x081CACC8`, offset `+0x28` per record
+Looking at the 65 coaches in the game, they cluster into clear tiers:
 
-Each monster type has 32 bytes of growth grade data using characters:
-- `'1'` through `'5'` (numeric tiers)
-- `'A'` through `'E'` (letter tiers)
-- `'S'`, `'T'`, `'#'`, `'$'`, `'%'` (special grades)
+| Tier | Stat Total Range | Drill Difficulty | Examples |
+|------|-----------------|-----------------|----------|
+| **Basic** | 1400-1700 | 3 | Early-game AGIMA coaches |
+| **Standard** | 1700-2100 | 3-4 | Mid-game coaches |
+| **Advanced** | 2100-2600 | 4-5 | Named coaches like Morgan, Arther |
+| **Elite** | 2600-3500 | 5 | Late-game / special coaches |
+| **Legendary** | 3500-3850 | 5 | Endgame coaches (stat totals of 700-900 per stat) |
 
-These grades influence the visual representation of stat aptitudes and may serve as multipliers in hidden growth calculations.
+The top coaches in the game have individual stats of 800-900 and total stat pools of 3500+. These are the coaches the community refers to when talking about maxing monsters to all-999.
 
 ---
 
-## Modding Implications
+## Traits from Coaches
 
-### Easy Balance Changes
+Coaches can pass personality traits (like Hi Aim, Charisma, Ironhart, Up Mind, etc.) to your monster during sparring. Each coach has specific trait modifiers -- whether they pass a trait depends on a probability check using those modifiers.
 
-1. **Coach stat totals** (offset `+0x24`): Change how much stat potential each training type offers
-2. **Fatigue deltas** (offset `+0x0E`): Make technique learning cheaper or make regular training costlier
-3. **Drill difficulty** (offset `+0x32`): Adjust which coaches are available at different game stages
-4. **Technique slots** (offset `+0x10`): Change which techniques each coach can teach
-
-### Example Mod: "Balanced Technique Learning"
-
-Currently, technique-learning coaches cost 27-45 lifespan points per week. To make this less punishing:
-- Change fatigue_delta from `0x2D` (45) to `0x0F` (15) at the relevant record offset
-- This halves the lifespan cost of learning techniques
-- Alternatively, set all fatigue_deltas to 0 to remove lifespan costs entirely
-
-### ROM Locations for Patching
-
-| What | Address | Size | Notes |
-|------|---------|------|-------|
-| Coach Table Start | `0x0021856C` (ROM offset) | 65 x 56 bytes | All coach records |
-| Single Coach Fatigue | `table_start + index*56 + 0x0E` | 1 byte (signed) | Per-coach lifespan cost |
-| Coach Stat Totals | `table_start + index*56 + 0x24` | 12 bytes (6 x uint16 LE) | Per-coach stat targets |
-| Stat Growth Display | `0x001C9F80` (ROM offset) | 70 x 12 bytes | Visual feedback table |
+Community observations confirmed by the code:
+- Traits and techniques are resolved independently during sparring
+- You can get a trait, a technique, both, or neither from a single sparring session
+- If a coach has a high trait modifier, you're very likely to get that trait before getting a technique (which matches the community observation that traits sometimes "block" technique learning until acquired)

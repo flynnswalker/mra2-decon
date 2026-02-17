@@ -1,228 +1,138 @@
-# MRA2 Battle Mechanics - Complete ROM Analysis
+# MRA2 Battle Mechanics
 
-> Extracted via ARM7TDMI / THUMB disassembly of Monster Rancher Advance 2 (USA) ROM.
-> Cross-validated against LegendCup community data where possible.
-
----
-
-## Overview
-
-Battle resolution in MRA2 is a multi-phase scoring system. Each battle turn computes an **outcome score** through 8 sequential phases that consider type compatibility, guts, loyalty, raw stat differences, breed matchups, level gaps, and technique usage. The final score maps to one of 5 outcome tiers that determine damage dealt and guts changes.
-
-**Main Battle Function**: `0x080432E8`
+> What actually determines whether your monster's attacks land, how hard they hit, and who wins fights.
 
 ---
 
-## Phase-by-Phase Breakdown
+## How a Battle Turn Works
 
-### Phase 1: Type Compatibility
+Every time your monster takes an action in battle, the game computes an **outcome score** by running through several checks in order. The final score determines whether the attack was a miss, a weak hit, a solid hit, or a devastating blow. Here's what feeds into that score, in the order the game evaluates them:
 
-Both monsters have a compatibility byte at `struct+0x104`. These are looked up in a type advantage table:
+### 1. Type Compatibility (Hidden Rock-Paper-Scissors)
 
-**Type Index Table**: `0x081E9224` (byte array)
-**Type Advantage Table**: `0x081C9A00` (15x15 grid of signed bytes)
+Every monster has a hidden **compatibility type**. The game cross-references the attacker's type against the defender's type in a 15x15 matchup grid. The result is a modifier from **-2** (strong disadvantage) to **+2** (strong advantage).
 
-```
-attacker_compat = type_index_table[attacker.compat_byte]
-defender_compat = type_index_table[defender.compat_byte]
-combined_index = attacker_compat * 5 + defender_compat
-advantage = type_advantage_table[combined_index]    // range: -2 to +2
-```
+**What this means:** Before stats even matter, some monsters have a built-in edge against others. This is completely invisible to the player. A +2 advantage gives a meaningful head start on the outcome score, while a -2 means you need significantly better stats just to break even.
 
-The advantage value feeds into a switch statement that adds/subtracts from the running score. This is essentially a **rock-paper-scissors** layer -- certain monster type pairings have inherent advantages.
+### 2. Guts Level
 
-**Gameplay Impact**: Type matchups create a strategic layer before any stats matter. A +2 advantage gives a significant head start on the score, while -2 means you're fighting uphill. This is invisible to the player but heavily influences outcomes.
+The game averages both monsters' current guts and maps it to a tier:
 
-### Phase 2: Guts Modifier
+| Average Guts | Tier | Score Contribution |
+|-------------|------|-------------------|
+| 0-24 | Low | Small bonus |
+| 25-49 | Medium-Low | Moderate bonus |
+| 50-69 | Medium | Good bonus |
+| 70-89 | High | Strong bonus |
+| 90+ | Very High | Maximum bonus |
 
-Uses the average guts between both fighters:
+**What this means:** Higher guts at the moment of attack = stronger attacks. Monsters with fast guts regeneration get a double benefit: they can attack more often AND each attack scores higher.
 
-```
-avg_guts = (attacker.field_0x2F + defender.field_0x2F) / 2
-```
+### 3. Loyalty / Mood
 
-**Guts Tier Thresholds**:
+Uses the same tiered system as guts. Higher loyalty = better battle performance.
 
-| Avg Guts | Tier | Lookup Table 1 | Lookup Table 2 |
-|----------|------|----------------|----------------|
-| 0-24 | 0 | 5 | 20 |
-| 25-49 | 1 | 8 | 25 |
-| 50-69 | 2 | 12 | 27 |
-| 70-89 | 3 | 13 | 35 |
-| 90+ | 4 | 14 | 40 |
+**What this means:** A well-treated, happy monster literally fights harder than a stressed or neglected one. This is a direct, mechanical bonus, not just flavor.
 
-**Lookup Table 1**: `0x081C9B10` (5 x uint32)
-**Lookup Table 2**: `0x081C9B24` (5 x uint32)
+### 4. Stat Differences (The Core of Combat)
 
-**Gameplay Impact**: Higher guts means more score potential. Monsters that regenerate guts quickly have a compounding advantage -- they can attack more often AND each attack scores slightly higher. The jump from tier 2 to tier 3 (crossing 70 avg guts) is particularly significant, going from 27 to 35 on table 2.
+This is the biggest factor. For **each of the 6 stats** (POW, INT, ACC, SPD, DEF, LIF), the game checks the gap between attacker and defender:
 
-### Phase 3: Loyalty/Mood Modifier
+**The rule:** Stat differences of 100 or less **contribute nothing**. Only gaps above 100 count.
 
-Uses the same tiered threshold structure for field `0x32` (loyalty/mood). Higher loyalty means better battle performance.
-
-**Gameplay Impact**: This is why keeping your monster happy matters in battle. A well-treated monster with high loyalty gets a score bonus on every action. Neglected or stressed monsters fight worse than their raw stats suggest.
-
-### Phase 4: Stat Differences (The Core Formula)
-
-This is where raw stats matter most. For **each of the 6 stats** (POW, INT, SKI, SPD, DEF, LIF):
+For gaps above 100, the bonus per stat is:
 
 ```
-diff = abs(attacker_stat - defender_stat)
-
-if diff > 100:
-    adjusted = abs(diff - 100)
-    modifier = (adjusted * 20) >> 8       // = adjusted * 20 / 256
-    score += 1 + modifier
+bonus = 1 + (gap_above_100 * 20 / 256)
 ```
 
-**Worked Example**: Attacker POW = 500, Defender POW = 300
+**Worked examples:**
+- Your POW is 450, opponent's POW is 400 → gap is 50 → **no bonus** (under 100)
+- Your POW is 500, opponent's POW is 300 → gap is 200 → bonus = 1 + (100 * 20 / 256) = **8 points**
+- Your POW is 700, opponent's POW is 200 → gap is 500 → bonus = 1 + (400 * 20 / 256) = **32 points**
 
-```
-diff = |500 - 300| = 200
-200 > 100, so:
-adjusted = |200 - 100| = 100
-modifier = (100 * 20) >> 8 = 2000 >> 8 = 7
-score += 1 + 7 = 8
-```
+This is calculated for ALL 6 stats and the bonuses stack.
 
-**Key Properties**:
-- Stats within 100 points of each other contribute **nothing** to the score
-- Only advantages beyond the 100-point threshold count
-- The formula uses fixed-point arithmetic (multiply then shift right 8 = divide by 256)
-- Each stat is evaluated independently, so being dominant in multiple stats compounds the bonus
+**What this means for gameplay:**
 
-**Gameplay Impact**: This means small stat differences are irrelevant in battle. If your monster has 450 POW and the opponent has 400, that 50-point gap contributes zero to the score. You need **decisive** stat advantages (>100 gap) to get scoring benefits. This heavily favors specialized monsters over balanced ones -- a monster with 600 POW and 200 INT will score better against most opponents than a monster with 400 in both.
+This is the single most important formula in the battle system, and it has huge strategic implications:
 
-### Phase 5: Breed Compatibility
+- **Small advantages don't matter.** If you and your opponent are within 100 points on every stat, the stat phase contributes ZERO to your score. The battle is decided entirely by type matchups, guts, loyalty, and luck.
 
-Similar to Phase 1 but uses breed IDs (field `0x0C`) instead of compatibility bytes:
+- **Specialization beats balance.** A monster with 600 POW and 200 INT will often outperform one with 400 in both, because the 600 creates a gap above the threshold while 400 might not. Total stat points matter less than having *decisive advantages* in specific stats.
 
-```
-combined_index = defender_breed * 15 + attacker_breed
-advantage = breed_advantage_table[combined_index]    // at 0x081C9A19
-```
+- **DEF and LIF count too.** It's not just offensive stats -- the game checks ALL six, so having 300 more DEF than your opponent gives you scoring bonus just like having 300 more POW.
 
-Result is -2 to +2, feeding into another switch-based score modifier.
+### 5. Breed Compatibility
 
-**Gameplay Impact**: Another hidden layer of type advantage. Some breed families inherently do better against others regardless of stats.
+Similar to type compatibility but uses the monster's breed family. Another hidden -2 to +2 modifier from a matchup grid.
 
-### Phase 6: Level Modifier
+### 6. Level Difference
 
-```
-level_diff = attacker.field_0x12 - defender.field_0x12
+- Same level: **+10** to score
+- One level apart: **+5** to score
+- More than one level apart: no bonus
 
-if level_diff == 0:    score += 10
-if |level_diff| == 1:  score += 5
-```
+### 7. Technique Multiplier
 
-Then, if the attacker has a valid technique (field `0x18`):
-```
-score = score * 3 / 2     // 1.5x multiplier
-```
+If the attacker uses a technique: **entire score is multiplied by 1.5x**
 
-**Gameplay Impact**: Equal-level fights get a +10 bonus (encouraging matched competition). Being 1 level apart gives +5. The technique multiplier is massive -- using a technique makes your entire accumulated score 50% higher. This is why technique usage is so dominant in competitive play.
+**What this means:** Using a technique is enormously powerful. It doesn't just add damage -- it multiplies your ENTIRE accumulated score from all the previous phases by 50%. This is why technique usage dominates competitive play.
 
 ---
 
-## Final Score to Outcome (Phase 7)
+## From Score to Outcome
 
-The accumulated score `r6` maps to outcome tiers:
+After all phases, the final score maps to one of 5 outcomes:
 
-| Score Range | Tier | Name | Meaning |
-|-------------|------|------|---------|
-| 0-40 | 0 | Fail | Attack misses or is blocked |
-| 41-50 | 1 | Slight | Grazing hit, minimal damage |
-| 51-65 | 2 | Moderate | Solid hit, decent damage |
-| 66-99 | 3 | Strong | Heavy hit, major damage |
-| 100+ | 4 | Overwhelming | Devastating hit, maximum damage |
-
----
-
-## Guts Change on Outcome (Phase 8)
-
-After resolving the attack, the attacker's guts are modified:
-
-| Outcome Tier | Guts Change | Meaning |
-|-------------|-------------|---------|
-| 0 (Fail) | **-4** | Whiffing is heavily punished |
-| 1 (Slight) | **-1** | Small penalty for weak hits |
-| 2 (Moderate) | **0** | Break even |
-| 3 (Strong) | **+1** | Rewarded for strong attacks |
-| 4 (Overwhelming) | **+1** | Same reward as Strong |
-
-**Gameplay Impact**: Missing attacks (-4 guts) is extremely costly. It creates a death spiral: low accuracy leads to misses, which drain guts, which prevents attacking, which leads to more missed opportunities. This is why SKI (accuracy) is considered one of the most important stats -- even a slightly inaccurate monster can spiral out of control in battle.
-
-Conversely, strong hits generate guts (+1), creating a positive feedback loop for dominant fighters. A monster that lands consistent strong hits essentially has infinite guts.
+| Score | Outcome | What Happens |
+|-------|---------|-------------|
+| 0-40 | **Miss / Block** | Attack fails entirely |
+| 41-50 | **Grazing Hit** | Minimal damage |
+| 51-65 | **Solid Hit** | Decent damage |
+| 66-99 | **Heavy Hit** | Major damage |
+| 100+ | **Devastating** | Maximum damage |
 
 ---
 
-## The Type Advantage Grid
+## Guts Change After Attacking
 
-The 15x15 type advantage table at `0x081C9A00` contains values from -2 to +2. Some notable patterns from the extracted data:
+After each attack resolves, the attacker's guts are adjusted:
 
-- Values of **+2** indicate strong advantage (rock-paper-scissors winner)
-- Values of **-2** indicate strong disadvantage
-- Values of **0** indicate neutral matchup
-- The grid is **not symmetric** -- A beating B doesn't mean B loses to A equally
+| Outcome | Guts Change | Why This Matters |
+|---------|------------|-----------------|
+| Miss | **-4 guts** | Whiffing is brutally punished |
+| Grazing Hit | **-1 guts** | Small penalty |
+| Solid Hit | **No change** | Break even |
+| Heavy Hit+ | **+1 guts** | Rewarded for dominance |
 
-This means certain breed types have inherently favorable or unfavorable tournament matchups that no amount of stat training can fully overcome.
+**What this means:** Missing creates a **death spiral**. Your monster misses → loses 4 guts → can't attack for a while → falls behind → the next attack is at lower guts (weaker) → more likely to miss again. This is why ACC (accuracy / hit rate) is widely considered the most important stat in MRA2. An inaccurate monster can lose battles it should win on raw stats because of the miss penalty spiral.
 
----
-
-## PRNG in Battle
-
-Battle uses the same Linear Congruential Generator as training:
-
-```
-seed = seed * 41
-result = ((seed >> 16) + seed) & 0x7FFF
-```
-
-**Function**: `0x0806354C`
-
-The PRNG affects technique hit/miss resolution, critical hit chances, and random variance on damage. Because it's a simple LCG with seed * 41, the sequence is deterministic and predictable.
+Conversely, a monster landing consistent heavy hits gets +1 guts per attack, essentially fueling infinite aggression.
 
 ---
 
-## Strategic Implications
+## Why Certain Monsters Dominate
 
-### Why Specialized Monsters Win
+Putting all the formulas together explains the competitive meta:
 
-The stat difference formula (Phase 4) has a 100-point dead zone. This means:
-- A monster with 500/500/500/500/500/500 (balanced, 3000 total) scores 0 from stat diffs against a 400/400/400/400/400/400 opponent
-- A monster with 800/100/100/800/100/100 (specialized, 2000 total) scores bonuses from the two 400+ gaps even with lower total stats
+1. **ACC is king** because missing costs -4 guts and hitting gives +1, creating feedback loops in both directions.
 
-### Why Accuracy Matters Most
+2. **Specialized builds beat balanced ones** because the stat difference formula has a 100-point dead zone. A monster with two stats at 700 creates scoring gaps where a balanced monster with six stats at 450 creates none.
 
-1. SKI directly affects hit rate (whether your attack lands)
-2. Missing costs -4 guts (Phase 8)
-3. Landing strong hits gives +1 guts
-4. Techniques give a 1.5x score multiplier
-5. Combined: accurate monsters maintain guts, land techniques, and snowball
+3. **Techniques are essential** because the 1.5x multiplier on your entire score makes the difference between "Solid Hit" and "Devastating" consistently.
 
-### Why Type Matchups Are Hidden Power
+4. **Hidden type matchups** mean some fights are rigged before they start. A monster with +2 type advantage AND +2 breed advantage gets roughly the equivalent of a 200-point stat gap for free.
 
-Phases 1 and 5 provide up to +4 or -4 advantage from type/breed compatibility alone. This is equivalent to having massive stat gaps. Players who understand the type chart can pick favorable tournament matchups.
+5. **Guts regen rate** compounds everything. Fast guts means more attacks per fight AND higher guts at moment of attack AND ability to recover from misses faster.
 
 ---
 
-## Modding Implications
+## What This Means for Balance Modding
 
-### Easy Balance Changes
+The most impactful changes to the battle system:
 
-| What | ROM Offset | Size | Notes |
-|------|-----------|------|-------|
-| Type Advantage Grid | `0x001C9A00` | 225 bytes (15x15) | Signed bytes, -2 to +2 |
-| Guts Tier Table 1 | `0x001C9B10` | 20 bytes (5 x uint32) | Score contribution by guts |
-| Guts Tier Table 2 | `0x001C9B24` | 20 bytes (5 x uint32) | Score contribution by guts |
-| Score Thresholds | In code at `0x080432E8` | Immediate values | Tier boundaries (40/50/65/99) |
-| Guts Change Values | In code at `0x080432E8` | Immediate values | -4/-1/0/+1 per tier |
-| Technique Multiplier | In code | `score * 3 / 2` | Change 3 to adjust multiplier |
-| Stat Diff Dead Zone | In code | `cmp diff, #100` | Change 100 to adjust threshold |
-
-### Example Mod: "Reduce Accuracy Dominance"
-
-- Change miss penalty from -4 to -2 guts (less punishing for inaccurate monsters)
-- Reduce technique multiplier from 1.5x to 1.25x
-- Lower the stat difference dead zone from 100 to 50 (making small advantages count)
-- This would make balanced stat builds more viable and reduce the SKI meta
+- **Reducing the 100-point dead zone** (e.g., to 50) would make small stat differences matter, rewarding balanced builds
+- **Reducing the miss penalty** (e.g., -4 to -2 guts) would make inaccurate but powerful monsters more viable
+- **Reducing the technique multiplier** (e.g., 1.5x to 1.2x) would reduce technique dominance
+- **Changing the type matchup grid** could rebalance which breeds are favored in tournaments
