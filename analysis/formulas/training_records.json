@@ -1,0 +1,2394 @@
+[
+  {
+    "index": 0,
+    "stats": {
+      "pow": 200,
+      "int": 350,
+      "ski": 320,
+      "spd": 330,
+      "def": 150,
+      "lif": 250
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 0,
+    "breed_sub": 21,
+    "drill_difficulty": 3,
+    "trait_modifiers": [
+      38,
+      0,
+      31,
+      0,
+      46,
+      0
+    ],
+    "fatigue_delta": -3,
+    "technique_slots": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "index": 1,
+    "stats": {
+      "pow": 400,
+      "int": 100,
+      "ski": 200,
+      "spd": 150,
+      "def": 400,
+      "lif": 400
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 1,
+    "breed_sub": 1,
+    "drill_difficulty": 3,
+    "trait_modifiers": [
+      -3,
+      -1,
+      0,
+      0,
+      0,
+      0
+    ],
+    "fatigue_delta": 0,
+    "technique_slots": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "index": 2,
+    "stats": {
+      "pow": 280,
+      "int": 320,
+      "ski": 400,
+      "spd": 300,
+      "def": 250,
+      "lif": 300
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 2,
+    "breed_sub": 2,
+    "drill_difficulty": 4,
+    "trait_modifiers": [
+      47,
+      0,
+      49,
+      0,
+      31,
+      0
+    ],
+    "fatigue_delta": 35,
+    "technique_slots": [
+      253,
+      0,
+      0
+    ]
+  },
+  {
+    "index": 3,
+    "stats": {
+      "pow": 500,
+      "int": 550,
+      "ski": 300,
+      "spd": 250,
+      "def": 350,
+      "lif": 450
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 4,
+    "breed_sub": 4,
+    "drill_difficulty": 5,
+    "trait_modifiers": [
+      44,
+      0,
+      51,
+      0,
+      47,
+      0
+    ],
+    "fatigue_delta": -3,
+    "technique_slots": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "index": 4,
+    "stats": {
+      "pow": 360,
+      "int": 350,
+      "ski": 420,
+      "spd": 250,
+      "def": 550,
+      "lif": 400
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 5,
+    "breed_sub": 5,
+    "drill_difficulty": 5,
+    "trait_modifiers": [
+      19,
+      0,
+      34,
+      0,
+      47,
+      0
+    ],
+    "fatigue_delta": -3,
+    "technique_slots": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "index": 5,
+    "stats": {
+      "pow": 240,
+      "int": 200,
+      "ski": 400,
+      "spd": 250,
+      "def": 280,
+      "lif": 300
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 6,
+    "breed_sub": 6,
+    "drill_difficulty": 3,
+    "trait_modifiers": [
+      -3,
+      -1,
+      0,
+      0,
+      0,
+      0
+    ],
+    "fatigue_delta": 0,
+    "technique_slots": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "index": 6,
+    "stats": {
+      "pow": 200,
+      "int": 50,
+      "ski": 220,
+      "spd": 450,
+      "def": 250,
+      "lif": 300
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 7,
+    "breed_sub": 7,
+    "drill_difficulty": 3,
+    "trait_modifiers": [
+      27,
+      0,
+      46,
+      0,
+      41,
+      0
+    ],
+    "fatigue_delta": 44,
+    "technique_slots": [
+      253,
+      0,
+      0
+    ]
+  },
+  {
+    "index": 7,
+    "stats": {
+      "pow": 330,
+      "int": 280,
+      "ski": 350,
+      "spd": 300,
+      "def": 300,
+      "lif": 450
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 8,
+    "breed_sub": 8,
+    "drill_difficulty": 4,
+    "trait_modifiers": [
+      41,
+      0,
+      44,
+      0,
+      51,
+      0
+    ],
+    "fatigue_delta": -3,
+    "technique_slots": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "index": 8,
+    "stats": {
+      "pow": 320,
+      "int": 360,
+      "ski": 440,
+      "spd": 430,
+      "def": 230,
+      "lif": 250
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 9,
+    "breed_sub": 9,
+    "drill_difficulty": 4,
+    "trait_modifiers": [
+      27,
+      0,
+      44,
+      0,
+      -3,
+      -1
+    ],
+    "fatigue_delta": 0,
+    "technique_slots": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "index": 9,
+    "stats": {
+      "pow": 400,
+      "int": 260,
+      "ski": 220,
+      "spd": 250,
+      "def": 320,
+      "lif": 400
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 10,
+    "breed_sub": 10,
+    "drill_difficulty": 3,
+    "trait_modifiers": [
+      26,
+      0,
+      35,
+      0,
+      -3,
+      -1
+    ],
+    "fatigue_delta": 0,
+    "technique_slots": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "index": 10,
+    "stats": {
+      "pow": 350,
+      "int": 520,
+      "ski": 480,
+      "spd": 320,
+      "def": 200,
+      "lif": 360
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 15,
+    "breed_sub": 15,
+    "drill_difficulty": 5,
+    "trait_modifiers": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "fatigue_delta": 0,
+    "technique_slots": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "index": 11,
+    "stats": {
+      "pow": 350,
+      "int": 250,
+      "ski": 250,
+      "spd": 550,
+      "def": 250,
+      "lif": 550
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 11,
+    "breed_sub": 11,
+    "drill_difficulty": 5,
+    "trait_modifiers": [
+      42,
+      0,
+      47,
+      0,
+      45,
+      0
+    ],
+    "fatigue_delta": -3,
+    "technique_slots": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "index": 12,
+    "stats": {
+      "pow": 250,
+      "int": 220,
+      "ski": 200,
+      "spd": 400,
+      "def": 280,
+      "lif": 300
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 12,
+    "breed_sub": 12,
+    "drill_difficulty": 3,
+    "trait_modifiers": [
+      41,
+      0,
+      40,
+      0,
+      -3,
+      -1
+    ],
+    "fatigue_delta": 0,
+    "technique_slots": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "index": 13,
+    "stats": {
+      "pow": 400,
+      "int": 150,
+      "ski": 200,
+      "spd": 300,
+      "def": 300,
+      "lif": 350
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 13,
+    "breed_sub": 13,
+    "drill_difficulty": 3,
+    "trait_modifiers": [
+      49,
+      0,
+      35,
+      0,
+      40,
+      0
+    ],
+    "fatigue_delta": 33,
+    "technique_slots": [
+      253,
+      0,
+      0
+    ]
+  },
+  {
+    "index": 14,
+    "stats": {
+      "pow": 310,
+      "int": 300,
+      "ski": 450,
+      "spd": 260,
+      "def": 360,
+      "lif": 350
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 14,
+    "breed_sub": 14,
+    "drill_difficulty": 4,
+    "trait_modifiers": [
+      45,
+      0,
+      -3,
+      -1,
+      0,
+      0
+    ],
+    "fatigue_delta": 0,
+    "technique_slots": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "index": 15,
+    "stats": {
+      "pow": 400,
+      "int": 400,
+      "ski": 420,
+      "spd": 500,
+      "def": 300,
+      "lif": 360
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 16,
+    "breed_sub": 14,
+    "drill_difficulty": 5,
+    "trait_modifiers": [
+      44,
+      0,
+      41,
+      0,
+      40,
+      0
+    ],
+    "fatigue_delta": -3,
+    "technique_slots": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "index": 16,
+    "stats": {
+      "pow": 350,
+      "int": 450,
+      "ski": 350,
+      "spd": 300,
+      "def": 350,
+      "lif": 600
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 17,
+    "breed_sub": 17,
+    "drill_difficulty": 5,
+    "trait_modifiers": [
+      40,
+      0,
+      28,
+      0,
+      31,
+      0
+    ],
+    "fatigue_delta": -3,
+    "technique_slots": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "index": 17,
+    "stats": {
+      "pow": 200,
+      "int": 300,
+      "ski": 260,
+      "spd": 460,
+      "def": 200,
+      "lif": 240
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 18,
+    "breed_sub": 18,
+    "drill_difficulty": 3,
+    "trait_modifiers": [
+      27,
+      0,
+      40,
+      0,
+      47,
+      0
+    ],
+    "fatigue_delta": 35,
+    "technique_slots": [
+      253,
+      0,
+      0
+    ]
+  },
+  {
+    "index": 18,
+    "stats": {
+      "pow": 330,
+      "int": 250,
+      "ski": 320,
+      "spd": 240,
+      "def": 300,
+      "lif": 240
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 19,
+    "breed_sub": 19,
+    "drill_difficulty": 3,
+    "trait_modifiers": [
+      40,
+      0,
+      47,
+      0,
+      45,
+      0
+    ],
+    "fatigue_delta": -3,
+    "technique_slots": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "index": 19,
+    "stats": {
+      "pow": 300,
+      "int": 300,
+      "ski": 380,
+      "spd": 460,
+      "def": 200,
+      "lif": 350
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 20,
+    "breed_sub": 0,
+    "drill_difficulty": 4,
+    "trait_modifiers": [
+      51,
+      0,
+      -3,
+      -1,
+      0,
+      0
+    ],
+    "fatigue_delta": 0,
+    "technique_slots": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "index": 20,
+    "stats": {
+      "pow": 220,
+      "int": 440,
+      "ski": 430,
+      "spd": 360,
+      "def": 220,
+      "lif": 250
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 21,
+    "breed_sub": 21,
+    "drill_difficulty": 4,
+    "trait_modifiers": [
+      38,
+      0,
+      47,
+      0,
+      40,
+      0
+    ],
+    "fatigue_delta": -3,
+    "technique_slots": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "index": 21,
+    "stats": {
+      "pow": 450,
+      "int": 250,
+      "ski": 300,
+      "spd": 450,
+      "def": 320,
+      "lif": 580
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 13,
+    "breed_sub": 19,
+    "drill_difficulty": 5,
+    "trait_modifiers": [
+      40,
+      0,
+      -3,
+      -1,
+      0,
+      0
+    ],
+    "fatigue_delta": 0,
+    "technique_slots": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "index": 22,
+    "stats": {
+      "pow": 320,
+      "int": 320,
+      "ski": 320,
+      "spd": 320,
+      "def": 320,
+      "lif": 200
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 8,
+    "breed_sub": 14,
+    "drill_difficulty": 3,
+    "trait_modifiers": [
+      27,
+      0,
+      48,
+      0,
+      35,
+      0
+    ],
+    "fatigue_delta": -3,
+    "technique_slots": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "index": 23,
+    "stats": {
+      "pow": 420,
+      "int": 30,
+      "ski": 100,
+      "spd": 400,
+      "def": 280,
+      "lif": 600
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 7,
+    "breed_sub": 18,
+    "drill_difficulty": 4,
+    "trait_modifiers": [
+      31,
+      0,
+      40,
+      0,
+      -3,
+      -1
+    ],
+    "fatigue_delta": 0,
+    "technique_slots": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "index": 24,
+    "stats": {
+      "pow": 260,
+      "int": 400,
+      "ski": 300,
+      "spd": 200,
+      "def": 400,
+      "lif": 400
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 2,
+    "breed_sub": 29,
+    "drill_difficulty": 4,
+    "trait_modifiers": [
+      40,
+      0,
+      27,
+      0,
+      35,
+      0
+    ],
+    "fatigue_delta": 38,
+    "technique_slots": [
+      253,
+      0,
+      0
+    ]
+  },
+  {
+    "index": 25,
+    "stats": {
+      "pow": 600,
+      "int": 600,
+      "ski": 200,
+      "spd": 200,
+      "def": 600,
+      "lif": 500
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 4,
+    "breed_sub": 25,
+    "drill_difficulty": 5,
+    "trait_modifiers": [
+      40,
+      0,
+      -3,
+      -1,
+      0,
+      0
+    ],
+    "fatigue_delta": 0,
+    "technique_slots": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "index": 26,
+    "stats": {
+      "pow": 350,
+      "int": 200,
+      "ski": 550,
+      "spd": 650,
+      "def": 300,
+      "lif": 400
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 29,
+    "breed_sub": 29,
+    "drill_difficulty": 5,
+    "trait_modifiers": [
+      34,
+      0,
+      35,
+      0,
+      40,
+      0
+    ],
+    "fatigue_delta": -3,
+    "technique_slots": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "index": 27,
+    "stats": {
+      "pow": 250,
+      "int": 570,
+      "ski": 480,
+      "spd": 500,
+      "def": 260,
+      "lif": 250
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 0,
+    "breed_sub": 0,
+    "drill_difficulty": 5,
+    "trait_modifiers": [
+      40,
+      0,
+      -3,
+      -1,
+      0,
+      0
+    ],
+    "fatigue_delta": 0,
+    "technique_slots": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "index": 28,
+    "stats": {
+      "pow": 630,
+      "int": 200,
+      "ski": 220,
+      "spd": 130,
+      "def": 600,
+      "lif": 650
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 1,
+    "breed_sub": 15,
+    "drill_difficulty": 5,
+    "trait_modifiers": [
+      34,
+      0,
+      -3,
+      -1,
+      0,
+      0
+    ],
+    "fatigue_delta": 0,
+    "technique_slots": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "index": 29,
+    "stats": {
+      "pow": 280,
+      "int": 230,
+      "ski": 430,
+      "spd": 330,
+      "def": 290,
+      "lif": 380
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 2,
+    "breed_sub": 15,
+    "drill_difficulty": 4,
+    "trait_modifiers": [
+      41,
+      0,
+      47,
+      0,
+      -3,
+      -1
+    ],
+    "fatigue_delta": 0,
+    "technique_slots": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "index": 30,
+    "stats": {
+      "pow": 340,
+      "int": 250,
+      "ski": 310,
+      "spd": 340,
+      "def": 310,
+      "lif": 340
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 3,
+    "breed_sub": 8,
+    "drill_difficulty": 4,
+    "trait_modifiers": [
+      45,
+      0,
+      -3,
+      -1,
+      0,
+      0
+    ],
+    "fatigue_delta": 0,
+    "technique_slots": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "index": 31,
+    "stats": {
+      "pow": 400,
+      "int": 400,
+      "ski": 250,
+      "spd": 250,
+      "def": 300,
+      "lif": 400
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 4,
+    "breed_sub": 4,
+    "drill_difficulty": 4,
+    "trait_modifiers": [
+      37,
+      0,
+      51,
+      0,
+      -3,
+      -1
+    ],
+    "fatigue_delta": 0,
+    "technique_slots": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "index": 32,
+    "stats": {
+      "pow": 300,
+      "int": 250,
+      "ski": 350,
+      "spd": 200,
+      "def": 350,
+      "lif": 300
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 5,
+    "breed_sub": 5,
+    "drill_difficulty": 3,
+    "trait_modifiers": [
+      0,
+      0,
+      3,
+      0,
+      44,
+      0
+    ],
+    "fatigue_delta": 27,
+    "technique_slots": [
+      28,
+      0,
+      253
+    ]
+  },
+  {
+    "index": 33,
+    "stats": {
+      "pow": 320,
+      "int": 400,
+      "ski": 450,
+      "spd": 400,
+      "def": 400,
+      "lif": 350
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 6,
+    "breed_sub": 6,
+    "drill_difficulty": 5,
+    "trait_modifiers": [
+      5,
+      0,
+      51,
+      0,
+      31,
+      0
+    ],
+    "fatigue_delta": -3,
+    "technique_slots": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "index": 34,
+    "stats": {
+      "pow": 280,
+      "int": 80,
+      "ski": 500,
+      "spd": 180,
+      "def": 150,
+      "lif": 300
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 7,
+    "breed_sub": 7,
+    "drill_difficulty": 3,
+    "trait_modifiers": [
+      31,
+      0,
+      44,
+      0,
+      27,
+      0
+    ],
+    "fatigue_delta": 45,
+    "technique_slots": [
+      253,
+      0,
+      0
+    ]
+  },
+  {
+    "index": 35,
+    "stats": {
+      "pow": 360,
+      "int": 230,
+      "ski": 300,
+      "spd": 400,
+      "def": 350,
+      "lif": 400
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 8,
+    "breed_sub": 25,
+    "drill_difficulty": 4,
+    "trait_modifiers": [
+      31,
+      0,
+      19,
+      0,
+      40,
+      0
+    ],
+    "fatigue_delta": 41,
+    "technique_slots": [
+      49,
+      0,
+      253
+    ]
+  },
+  {
+    "index": 36,
+    "stats": {
+      "pow": 360,
+      "int": 360,
+      "ski": 400,
+      "spd": 380,
+      "def": 280,
+      "lif": 300
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 9,
+    "breed_sub": 9,
+    "drill_difficulty": 4,
+    "trait_modifiers": [
+      44,
+      0,
+      35,
+      0,
+      29,
+      0
+    ],
+    "fatigue_delta": 37,
+    "technique_slots": [
+      253,
+      0,
+      0
+    ]
+  },
+  {
+    "index": 37,
+    "stats": {
+      "pow": 450,
+      "int": 250,
+      "ski": 200,
+      "spd": 180,
+      "def": 310,
+      "lif": 400
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 10,
+    "breed_sub": 10,
+    "drill_difficulty": 3,
+    "trait_modifiers": [
+      45,
+      0,
+      -3,
+      -1,
+      0,
+      0
+    ],
+    "fatigue_delta": 0,
+    "technique_slots": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "index": 38,
+    "stats": {
+      "pow": 100,
+      "int": 50,
+      "ski": 510,
+      "spd": 480,
+      "def": 200,
+      "lif": 500
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 11,
+    "breed_sub": 11,
+    "drill_difficulty": 3,
+    "trait_modifiers": [
+      33,
+      0,
+      -3,
+      -1,
+      0,
+      0
+    ],
+    "fatigue_delta": 0,
+    "technique_slots": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "index": 39,
+    "stats": {
+      "pow": 350,
+      "int": 300,
+      "ski": 300,
+      "spd": 550,
+      "def": 350,
+      "lif": 420
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 12,
+    "breed_sub": 12,
+    "drill_difficulty": 5,
+    "trait_modifiers": [
+      38,
+      0,
+      -3,
+      -1,
+      0,
+      0
+    ],
+    "fatigue_delta": 0,
+    "technique_slots": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "index": 40,
+    "stats": {
+      "pow": 450,
+      "int": 200,
+      "ski": 300,
+      "spd": 450,
+      "def": 350,
+      "lif": 500
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 13,
+    "breed_sub": 13,
+    "drill_difficulty": 5,
+    "trait_modifiers": [
+      42,
+      0,
+      -3,
+      -1,
+      0,
+      0
+    ],
+    "fatigue_delta": 0,
+    "technique_slots": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "index": 41,
+    "stats": {
+      "pow": 330,
+      "int": 310,
+      "ski": 430,
+      "spd": 250,
+      "def": 330,
+      "lif": 370
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 14,
+    "breed_sub": 14,
+    "drill_difficulty": 4,
+    "trait_modifiers": [
+      31,
+      0,
+      44,
+      0,
+      30,
+      0
+    ],
+    "fatigue_delta": -3,
+    "technique_slots": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "index": 42,
+    "stats": {
+      "pow": 320,
+      "int": 500,
+      "ski": 400,
+      "spd": 200,
+      "def": 150,
+      "lif": 400
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 15,
+    "breed_sub": 15,
+    "drill_difficulty": 4,
+    "trait_modifiers": [
+      31,
+      0,
+      32,
+      0,
+      41,
+      0
+    ],
+    "fatigue_delta": 44,
+    "technique_slots": [
+      46,
+      0,
+      253
+    ]
+  },
+  {
+    "index": 43,
+    "stats": {
+      "pow": 200,
+      "int": 280,
+      "ski": 420,
+      "spd": 380,
+      "def": 50,
+      "lif": 400
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 16,
+    "breed_sub": 16,
+    "drill_difficulty": 3,
+    "trait_modifiers": [
+      31,
+      0,
+      -3,
+      -1,
+      0,
+      0
+    ],
+    "fatigue_delta": 0,
+    "technique_slots": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "index": 44,
+    "stats": {
+      "pow": 260,
+      "int": 380,
+      "ski": 380,
+      "spd": 220,
+      "def": 200,
+      "lif": 400
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 17,
+    "breed_sub": 7,
+    "drill_difficulty": 3,
+    "trait_modifiers": [
+      13,
+      0,
+      27,
+      0,
+      40,
+      0
+    ],
+    "fatigue_delta": -3,
+    "technique_slots": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "index": 45,
+    "stats": {
+      "pow": 350,
+      "int": 350,
+      "ski": 400,
+      "spd": 600,
+      "def": 200,
+      "lif": 380
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 18,
+    "breed_sub": 18,
+    "drill_difficulty": 5,
+    "trait_modifiers": [
+      25,
+      0,
+      35,
+      0,
+      -3,
+      -1
+    ],
+    "fatigue_delta": 0,
+    "technique_slots": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "index": 46,
+    "stats": {
+      "pow": 520,
+      "int": 300,
+      "ski": 330,
+      "spd": 310,
+      "def": 480,
+      "lif": 380
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 19,
+    "breed_sub": 19,
+    "drill_difficulty": 5,
+    "trait_modifiers": [
+      1,
+      0,
+      40,
+      0,
+      46,
+      0
+    ],
+    "fatigue_delta": 38,
+    "technique_slots": [
+      31,
+      0,
+      44,
+      0
+    ]
+  },
+  {
+    "index": 47,
+    "stats": {
+      "pow": 300,
+      "int": 340,
+      "ski": 480,
+      "spd": 510,
+      "def": 200,
+      "lif": 380
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 20,
+    "breed_sub": 20,
+    "drill_difficulty": 4,
+    "trait_modifiers": [
+      38,
+      0,
+      31,
+      0,
+      -3,
+      -1
+    ],
+    "fatigue_delta": 0,
+    "technique_slots": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "index": 48,
+    "stats": {
+      "pow": 230,
+      "int": 380,
+      "ski": 450,
+      "spd": 300,
+      "def": 300,
+      "lif": 340
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 21,
+    "breed_sub": 21,
+    "drill_difficulty": 4,
+    "trait_modifiers": [
+      0,
+      0,
+      18,
+      0,
+      35,
+      0
+    ],
+    "fatigue_delta": 40,
+    "technique_slots": [
+      33,
+      0,
+      253
+    ]
+  },
+  {
+    "index": 49,
+    "stats": {
+      "pow": 500,
+      "int": 400,
+      "ski": 600,
+      "spd": 400,
+      "def": 500,
+      "lif": 400
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 14,
+    "breed_sub": 4,
+    "drill_difficulty": 5,
+    "trait_modifiers": [
+      45,
+      0,
+      41,
+      0,
+      40,
+      0
+    ],
+    "fatigue_delta": -3,
+    "technique_slots": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "index": 50,
+    "stats": {
+      "pow": 400,
+      "int": 250,
+      "ski": 300,
+      "spd": 400,
+      "def": 250,
+      "lif": 200
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 23,
+    "breed_sub": 23,
+    "drill_difficulty": 3,
+    "trait_modifiers": [
+      31,
+      0,
+      44,
+      0,
+      -3,
+      -1
+    ],
+    "fatigue_delta": 0,
+    "technique_slots": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "index": 51,
+    "stats": {
+      "pow": 250,
+      "int": 280,
+      "ski": 310,
+      "spd": 350,
+      "def": 260,
+      "lif": 280
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 24,
+    "breed_sub": 9,
+    "drill_difficulty": 3,
+    "trait_modifiers": [
+      42,
+      0,
+      31,
+      0,
+      -3,
+      -1
+    ],
+    "fatigue_delta": 0,
+    "technique_slots": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "index": 52,
+    "stats": {
+      "pow": 300,
+      "int": 620,
+      "ski": 380,
+      "spd": 240,
+      "def": 280,
+      "lif": 600
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 10,
+    "breed_sub": 12,
+    "drill_difficulty": 5,
+    "trait_modifiers": [
+      46,
+      0,
+      31,
+      0,
+      44,
+      0
+    ],
+    "fatigue_delta": -3,
+    "technique_slots": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "index": 53,
+    "stats": {
+      "pow": 100,
+      "int": 10,
+      "ski": 20,
+      "spd": 670,
+      "def": 450,
+      "lif": 200
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 7,
+    "breed_sub": 21,
+    "drill_difficulty": 4,
+    "trait_modifiers": [
+      45,
+      0,
+      46,
+      0,
+      -3,
+      -1
+    ],
+    "fatigue_delta": 0,
+    "technique_slots": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "index": 54,
+    "stats": {
+      "pow": 400,
+      "int": 300,
+      "ski": 150,
+      "spd": 100,
+      "def": 400,
+      "lif": 650
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 1,
+    "breed_sub": 18,
+    "drill_difficulty": 4,
+    "trait_modifiers": [
+      42,
+      0,
+      34,
+      0,
+      41,
+      0
+    ],
+    "fatigue_delta": 40,
+    "technique_slots": [
+      51,
+      0,
+      253
+    ]
+  },
+  {
+    "index": 55,
+    "stats": {
+      "pow": 600,
+      "int": 500,
+      "ski": 700,
+      "spd": 700,
+      "def": 300,
+      "lif": 300
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 14,
+    "breed_sub": 27,
+    "drill_difficulty": 5,
+    "trait_modifiers": [
+      27,
+      0,
+      -3,
+      -1,
+      0,
+      0
+    ],
+    "fatigue_delta": 0,
+    "technique_slots": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "index": 56,
+    "stats": {
+      "pow": 300,
+      "int": 230,
+      "ski": 370,
+      "spd": 400,
+      "def": 300,
+      "lif": 150
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 29,
+    "breed_sub": 20,
+    "drill_difficulty": 3,
+    "trait_modifiers": [
+      41,
+      0,
+      -3,
+      -1,
+      0,
+      0
+    ],
+    "fatigue_delta": 0,
+    "technique_slots": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "index": 57,
+    "stats": {
+      "pow": 200,
+      "int": 360,
+      "ski": 310,
+      "spd": 330,
+      "def": 150,
+      "lif": 200
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 0,
+    "breed_sub": 0,
+    "drill_difficulty": 3,
+    "trait_modifiers": [
+      -3,
+      -1,
+      0,
+      0,
+      0,
+      0
+    ],
+    "fatigue_delta": 0,
+    "technique_slots": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "index": 58,
+    "stats": {
+      "pow": 480,
+      "int": 310,
+      "ski": 460,
+      "spd": 350,
+      "def": 440,
+      "lif": 360
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 23,
+    "breed_sub": 23,
+    "drill_difficulty": 5,
+    "trait_modifiers": [
+      0,
+      0,
+      6,
+      0,
+      47,
+      0
+    ],
+    "fatigue_delta": -3,
+    "technique_slots": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "index": 59,
+    "stats": {
+      "pow": 200,
+      "int": 200,
+      "ski": 420,
+      "spd": 310,
+      "def": 210,
+      "lif": 260
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 24,
+    "breed_sub": 24,
+    "drill_difficulty": 3,
+    "trait_modifiers": [
+      41,
+      0,
+      38,
+      0,
+      41,
+      0
+    ],
+    "fatigue_delta": -3,
+    "technique_slots": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "index": 60,
+    "stats": {
+      "pow": 300,
+      "int": 300,
+      "ski": 300,
+      "spd": 300,
+      "def": 300,
+      "lif": 300
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 3,
+    "breed_sub": 25,
+    "drill_difficulty": 3,
+    "trait_modifiers": [
+      39,
+      0,
+      27,
+      0,
+      44,
+      0
+    ],
+    "fatigue_delta": 41,
+    "technique_slots": [
+      253,
+      0,
+      0
+    ]
+  },
+  {
+    "index": 61,
+    "stats": {
+      "pow": 480,
+      "int": 120,
+      "ski": 150,
+      "spd": 150,
+      "def": 450,
+      "lif": 400
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 1,
+    "breed_sub": 12,
+    "drill_difficulty": 4,
+    "trait_modifiers": [
+      40,
+      0,
+      33,
+      0,
+      -3,
+      -1
+    ],
+    "fatigue_delta": 0,
+    "technique_slots": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "index": 62,
+    "stats": {
+      "pow": 500,
+      "int": 850,
+      "ski": 700,
+      "spd": 600,
+      "def": 500,
+      "lif": 700
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 0,
+    "breed_sub": 35,
+    "drill_difficulty": 5,
+    "trait_modifiers": [
+      27,
+      0,
+      40,
+      0,
+      -3,
+      -1
+    ],
+    "fatigue_delta": 0,
+    "technique_slots": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "index": 63,
+    "stats": {
+      "pow": 500,
+      "int": 500,
+      "ski": 500,
+      "spd": 200,
+      "def": 900,
+      "lif": 900
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 27,
+    "breed_sub": 27,
+    "drill_difficulty": 5,
+    "trait_modifiers": [
+      45,
+      0,
+      -3,
+      -1,
+      0,
+      0
+    ],
+    "fatigue_delta": 0,
+    "technique_slots": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "index": 64,
+    "stats": {
+      "pow": 800,
+      "int": 600,
+      "ski": 700,
+      "spd": 400,
+      "def": 650,
+      "lif": 700
+    },
+    "weekly_deltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "breed_main": 14,
+    "breed_sub": 25,
+    "drill_difficulty": 5,
+    "trait_modifiers": [
+      31,
+      0,
+      44,
+      0,
+      -3,
+      -1
+    ],
+    "fatigue_delta": 0,
+    "technique_slots": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+]

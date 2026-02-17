@@ -1,0 +1,22 @@
+{
+  "stress_thresholds": [
+    24,
+    49,
+    69,
+    89,
+    100
+  ],
+  "stat_formula": "base + ((base*256/100)*(bonus+tier))>>8, max 255",
+  "child_stress": "(p1+p2)/5",
+  "breed_bonuses": {
+    "0x14": "POW+10",
+    "0x15": "DEF+10",
+    "0x16": "SKI+10",
+    "0x17": "SPD+10",
+    "0x18": "INT+10",
+    "0x19": "LIF+10",
+    "0x1F": "DEF+10,LIF+10",
+    "0x20": "POW+10,INT+10",
+    "0x21": "SKI+10,SPD+10"
+  }
+}

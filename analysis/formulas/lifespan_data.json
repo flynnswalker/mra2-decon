@@ -1,0 +1,1078 @@
+{
+  "fields": {
+    "0x16": "uint16 at offset 0x0094, max 9999 - lifespan value A",
+    "0x17": "int16 at offset 0x0096, max 9999 - lifespan value B"
+  },
+  "aging_stage_formula": "clamp((field_0x16 - field_0x17) * 16 / field_0x16, 0, 15)",
+  "training_effect": "delta_struct[0x0E] added to BOTH fields per training week",
+  "breeding_stress": "(parent1_stress + parent2_stress) * 5",
+  "aging_lookup_table_addr": "0x083F3E20",
+  "aging_lookup_table_sample": {
+    "0": [
+      10,
+      15,
+      20,
+      25,
+      28,
+      30,
+      28,
+      25,
+      20,
+      20,
+      20,
+      18,
+      16,
+      14,
+      12,
+      10
+    ],
+    "1": [
+      10,
+      14,
+      18,
+      22,
+      26,
+      29,
+      30,
+      29,
+      25,
+      22,
+      20,
+      18,
+      16,
+      14,
+      12,
+      10
+    ],
+    "2": [
+      10,
+      13,
+      16,
+      21,
+      24,
+      26,
+      28,
+      30,
+      28,
+      25,
+      22,
+      20,
+      18,
+      16,
+      13,
+      10
+    ],
+    "3": [
+      10,
+      12,
+      14,
+      17,
+      20,
+      23,
+      26,
+      28,
+      30,
+      28,
+      26,
+      24,
+      22,
+      20,
+      17,
+      12
+    ],
+    "4": [
+      10,
+      12,
+      14,
+      16,
+      18,
+      20,
+      22,
+      25,
+      27,
+      29,
+      30,
+      29,
+      26,
+      23,
+      20,
+      17
+    ],
+    "5": [
+      10,
+      13,
+      17,
+      21,
+      25,
+      25,
+      25,
+      25,
+      25,
+      25,
+      24,
+      22,
+      20,
+      18,
+      16,
+      14
+    ],
+    "6": [
+      0,
+      0,
+      255,
+      255,
+      0,
+      2,
+      255,
+      255,
+      0,
+      4,
+      255,
+      255,
+      0,
+      1,
+      255,
+      255
+    ],
+    "7": [
+      0,
+      3,
+      255,
+      255,
+      0,
+      5,
+      255,
+      255,
+      1,
+      0,
+      4,
+      1,
+      1,
+      2,
+      1,
+      3
+    ],
+    "8": [
+      1,
+      4,
+      0,
+      3,
+      1,
+      1,
+      2,
+      4,
+      1,
+      3,
+      1,
+      4,
+      1,
+      5,
+      0,
+      1
+    ],
+    "9": [
+      1,
+      0,
+      2,
+      3,
+      1,
+      2,
+      0,
+      4,
+      1,
+      4,
+      5,
+      1,
+      1,
+      1,
+      5,
+      0
+    ],
+    "10": [
+      1,
+      3,
+      5,
+      0,
+      1,
+      5,
+      4,
+      3,
+      0,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18
+    ],
+    "11": [
+      19,
+      20,
+      39,
+      10,
+      239,
+      10,
+      27,
+      12,
+      30,
+      50,
+      50,
+      70,
+      70,
+      90,
+      90,
+      110
+    ],
+    "12": [
+      110,
+      130,
+      130,
+      150,
+      150,
+      200,
+      100,
+      130,
+      80,
+      100,
+      70,
+      90,
+      60,
+      90,
+      80,
+      100
+    ],
+    "13": [
+      120,
+      150,
+      150,
+      200,
+      120,
+      140,
+      100,
+      120,
+      80,
+      100,
+      60,
+      80,
+      40,
+      60,
+      20,
+      40
+    ],
+    "14": [
+      10,
+      20,
+      4,
+      0,
+      5,
+      0,
+      3,
+      0,
+      1,
+      0,
+      3,
+      0,
+      4,
+      0,
+      2,
+      0
+    ],
+    "15": [
+      3,
+      0,
+      2,
+      0,
+      4,
+      0,
+      203,
+      0,
+      204,
+      0,
+      202,
+      0,
+      200,
+      0,
+      202,
+      0
+    ]
+  },
+  "monster_lifespans": [
+    {
+      "monster_index": 0,
+      "lifespan_raw": 2500
+    },
+    {
+      "monster_index": 1,
+      "lifespan_raw": 2590
+    },
+    {
+      "monster_index": 2,
+      "lifespan_raw": 2480
+    },
+    {
+      "monster_index": 3,
+      "lifespan_raw": 2490
+    },
+    {
+      "monster_index": 4,
+      "lifespan_raw": 2530
+    },
+    {
+      "monster_index": 5,
+      "lifespan_raw": 2400
+    },
+    {
+      "monster_index": 6,
+      "lifespan_raw": 2450
+    },
+    {
+      "monster_index": 7,
+      "lifespan_raw": 2420
+    },
+    {
+      "monster_index": 8,
+      "lifespan_raw": 2530
+    },
+    {
+      "monster_index": 9,
+      "lifespan_raw": 2500
+    },
+    {
+      "monster_index": 10,
+      "lifespan_raw": 2500
+    },
+    {
+      "monster_index": 11,
+      "lifespan_raw": 2480
+    },
+    {
+      "monster_index": 12,
+      "lifespan_raw": 2510
+    },
+    {
+      "monster_index": 13,
+      "lifespan_raw": 2540
+    },
+    {
+      "monster_index": 14,
+      "lifespan_raw": 2420
+    },
+    {
+      "monster_index": 15,
+      "lifespan_raw": 2560
+    },
+    {
+      "monster_index": 16,
+      "lifespan_raw": 2500
+    },
+    {
+      "monster_index": 17,
+      "lifespan_raw": 2550
+    },
+    {
+      "monster_index": 18,
+      "lifespan_raw": 2480
+    },
+    {
+      "monster_index": 19,
+      "lifespan_raw": 2540
+    },
+    {
+      "monster_index": 20,
+      "lifespan_raw": 2510
+    },
+    {
+      "monster_index": 21,
+      "lifespan_raw": 2490
+    },
+    {
+      "monster_index": 22,
+      "lifespan_raw": 2800
+    },
+    {
+      "monster_index": 23,
+      "lifespan_raw": 2540
+    },
+    {
+      "monster_index": 24,
+      "lifespan_raw": 2550
+    },
+    {
+      "monster_index": 25,
+      "lifespan_raw": 2590
+    },
+    {
+      "monster_index": 26,
+      "lifespan_raw": 2540
+    },
+    {
+      "monster_index": 27,
+      "lifespan_raw": 2590
+    },
+    {
+      "monster_index": 28,
+      "lifespan_raw": 2710
+    },
+    {
+      "monster_index": 29,
+      "lifespan_raw": 2500
+    },
+    {
+      "monster_index": 30,
+      "lifespan_raw": 2480
+    },
+    {
+      "monster_index": 31,
+      "lifespan_raw": 2610
+    },
+    {
+      "monster_index": 32,
+      "lifespan_raw": 2600
+    },
+    {
+      "monster_index": 33,
+      "lifespan_raw": 2610
+    },
+    {
+      "monster_index": 34,
+      "lifespan_raw": 2670
+    },
+    {
+      "monster_index": 35,
+      "lifespan_raw": 2700
+    },
+    {
+      "monster_index": 36,
+      "lifespan_raw": 2650
+    },
+    {
+      "monster_index": 37,
+      "lifespan_raw": 2540
+    },
+    {
+      "monster_index": 38,
+      "lifespan_raw": 2600
+    },
+    {
+      "monster_index": 39,
+      "lifespan_raw": 2590
+    },
+    {
+      "monster_index": 40,
+      "lifespan_raw": 2570
+    },
+    {
+      "monster_index": 41,
+      "lifespan_raw": 2570
+    },
+    {
+      "monster_index": 42,
+      "lifespan_raw": 2660
+    },
+    {
+      "monster_index": 43,
+      "lifespan_raw": 2700
+    },
+    {
+      "monster_index": 44,
+      "lifespan_raw": 2670
+    },
+    {
+      "monster_index": 45,
+      "lifespan_raw": 2700
+    },
+    {
+      "monster_index": 46,
+      "lifespan_raw": 2540
+    },
+    {
+      "monster_index": 47,
+      "lifespan_raw": 2610
+    },
+    {
+      "monster_index": 48,
+      "lifespan_raw": 2620
+    },
+    {
+      "monster_index": 49,
+      "lifespan_raw": 2720
+    },
+    {
+      "monster_index": 50,
+      "lifespan_raw": 2540
+    },
+    {
+      "monster_index": 51,
+      "lifespan_raw": 2580
+    },
+    {
+      "monster_index": 52,
+      "lifespan_raw": 2470
+    },
+    {
+      "monster_index": 53,
+      "lifespan_raw": 2700
+    },
+    {
+      "monster_index": 54,
+      "lifespan_raw": 2680
+    },
+    {
+      "monster_index": 55,
+      "lifespan_raw": 2720
+    },
+    {
+      "monster_index": 56,
+      "lifespan_raw": 2700
+    },
+    {
+      "monster_index": 57,
+      "lifespan_raw": 2630
+    },
+    {
+      "monster_index": 58,
+      "lifespan_raw": 2590
+    },
+    {
+      "monster_index": 59,
+      "lifespan_raw": 2590
+    },
+    {
+      "monster_index": 60,
+      "lifespan_raw": 2600
+    },
+    {
+      "monster_index": 61,
+      "lifespan_raw": 2580
+    },
+    {
+      "monster_index": 62,
+      "lifespan_raw": 2590
+    },
+    {
+      "monster_index": 63,
+      "lifespan_raw": 2520
+    },
+    {
+      "monster_index": 64,
+      "lifespan_raw": 2620
+    },
+    {
+      "monster_index": 65,
+      "lifespan_raw": 2470
+    },
+    {
+      "monster_index": 66,
+      "lifespan_raw": 2500
+    },
+    {
+      "monster_index": 67,
+      "lifespan_raw": 2550
+    },
+    {
+      "monster_index": 68,
+      "lifespan_raw": 2620
+    },
+    {
+      "monster_index": 69,
+      "lifespan_raw": 2520
+    },
+    {
+      "monster_index": 70,
+      "lifespan_raw": 2600
+    },
+    {
+      "monster_index": 71,
+      "lifespan_raw": 2460
+    },
+    {
+      "monster_index": 72,
+      "lifespan_raw": 2570
+    },
+    {
+      "monster_index": 73,
+      "lifespan_raw": 2520
+    },
+    {
+      "monster_index": 74,
+      "lifespan_raw": 2620
+    },
+    {
+      "monster_index": 75,
+      "lifespan_raw": 2640
+    },
+    {
+      "monster_index": 76,
+      "lifespan_raw": 2600
+    },
+    {
+      "monster_index": 77,
+      "lifespan_raw": 2610
+    },
+    {
+      "monster_index": 78,
+      "lifespan_raw": 2700
+    },
+    {
+      "monster_index": 79,
+      "lifespan_raw": 2680
+    },
+    {
+      "monster_index": 80,
+      "lifespan_raw": 2680
+    },
+    {
+      "monster_index": 81,
+      "lifespan_raw": 2600
+    },
+    {
+      "monster_index": 82,
+      "lifespan_raw": 2600
+    },
+    {
+      "monster_index": 83,
+      "lifespan_raw": 2600
+    },
+    {
+      "monster_index": 84,
+      "lifespan_raw": 2540
+    },
+    {
+      "monster_index": 85,
+      "lifespan_raw": 2400
+    },
+    {
+      "monster_index": 86,
+      "lifespan_raw": 2430
+    },
+    {
+      "monster_index": 87,
+      "lifespan_raw": 2450
+    },
+    {
+      "monster_index": 88,
+      "lifespan_raw": 2390
+    },
+    {
+      "monster_index": 89,
+      "lifespan_raw": 2400
+    },
+    {
+      "monster_index": 90,
+      "lifespan_raw": 2470
+    },
+    {
+      "monster_index": 91,
+      "lifespan_raw": 2490
+    },
+    {
+      "monster_index": 92,
+      "lifespan_raw": 2370
+    },
+    {
+      "monster_index": 93,
+      "lifespan_raw": 2400
+    },
+    {
+      "monster_index": 94,
+      "lifespan_raw": 2480
+    },
+    {
+      "monster_index": 95,
+      "lifespan_raw": 2450
+    },
+    {
+      "monster_index": 96,
+      "lifespan_raw": 2460
+    },
+    {
+      "monster_index": 97,
+      "lifespan_raw": 2440
+    },
+    {
+      "monster_index": 98,
+      "lifespan_raw": 2450
+    },
+    {
+      "monster_index": 99,
+      "lifespan_raw": 2620
+    },
+    {
+      "monster_index": 100,
+      "lifespan_raw": 2400
+    },
+    {
+      "monster_index": 101,
+      "lifespan_raw": 2450
+    },
+    {
+      "monster_index": 102,
+      "lifespan_raw": 2450
+    },
+    {
+      "monster_index": 103,
+      "lifespan_raw": 2420
+    },
+    {
+      "monster_index": 104,
+      "lifespan_raw": 2440
+    },
+    {
+      "monster_index": 105,
+      "lifespan_raw": 2560
+    },
+    {
+      "monster_index": 106,
+      "lifespan_raw": 2660
+    },
+    {
+      "monster_index": 107,
+      "lifespan_raw": 2590
+    },
+    {
+      "monster_index": 108,
+      "lifespan_raw": 2570
+    },
+    {
+      "monster_index": 109,
+      "lifespan_raw": 2450
+    },
+    {
+      "monster_index": 110,
+      "lifespan_raw": 2700
+    },
+    {
+      "monster_index": 111,
+      "lifespan_raw": 2470
+    },
+    {
+      "monster_index": 112,
+      "lifespan_raw": 2570
+    },
+    {
+      "monster_index": 113,
+      "lifespan_raw": 2510
+    },
+    {
+      "monster_index": 114,
+      "lifespan_raw": 2650
+    },
+    {
+      "monster_index": 115,
+      "lifespan_raw": 2540
+    },
+    {
+      "monster_index": 116,
+      "lifespan_raw": 2550
+    },
+    {
+      "monster_index": 117,
+      "lifespan_raw": 2430
+    },
+    {
+      "monster_index": 118,
+      "lifespan_raw": 2600
+    },
+    {
+      "monster_index": 119,
+      "lifespan_raw": 2620
+    },
+    {
+      "monster_index": 120,
+      "lifespan_raw": 2620
+    },
+    {
+      "monster_index": 121,
+      "lifespan_raw": 2640
+    },
+    {
+      "monster_index": 122,
+      "lifespan_raw": 2650
+    },
+    {
+      "monster_index": 123,
+      "lifespan_raw": 2670
+    },
+    {
+      "monster_index": 124,
+      "lifespan_raw": 2550
+    },
+    {
+      "monster_index": 125,
+      "lifespan_raw": 2610
+    },
+    {
+      "monster_index": 126,
+      "lifespan_raw": 2440
+    },
+    {
+      "monster_index": 127,
+      "lifespan_raw": 2700
+    },
+    {
+      "monster_index": 128,
+      "lifespan_raw": 2490
+    },
+    {
+      "monster_index": 129,
+      "lifespan_raw": 2560
+    },
+    {
+      "monster_index": 130,
+      "lifespan_raw": 2480
+    },
+    {
+      "monster_index": 131,
+      "lifespan_raw": 2480
+    },
+    {
+      "monster_index": 132,
+      "lifespan_raw": 2580
+    },
+    {
+      "monster_index": 133,
+      "lifespan_raw": 2560
+    },
+    {
+      "monster_index": 134,
+      "lifespan_raw": 2600
+    },
+    {
+      "monster_index": 135,
+      "lifespan_raw": 2510
+    },
+    {
+      "monster_index": 136,
+      "lifespan_raw": 2510
+    },
+    {
+      "monster_index": 137,
+      "lifespan_raw": 2550
+    },
+    {
+      "monster_index": 138,
+      "lifespan_raw": 2590
+    },
+    {
+      "monster_index": 139,
+      "lifespan_raw": 2470
+    },
+    {
+      "monster_index": 140,
+      "lifespan_raw": 2530
+    },
+    {
+      "monster_index": 141,
+      "lifespan_raw": 2580
+    },
+    {
+      "monster_index": 142,
+      "lifespan_raw": 2590
+    },
+    {
+      "monster_index": 143,
+      "lifespan_raw": 2580
+    },
+    {
+      "monster_index": 144,
+      "lifespan_raw": 2490
+    },
+    {
+      "monster_index": 145,
+      "lifespan_raw": 2560
+    },
+    {
+      "monster_index": 146,
+      "lifespan_raw": 2480
+    },
+    {
+      "monster_index": 147,
+      "lifespan_raw": 2460
+    },
+    {
+      "monster_index": 148,
+      "lifespan_raw": 2490
+    },
+    {
+      "monster_index": 149,
+      "lifespan_raw": 2490
+    },
+    {
+      "monster_index": 150,
+      "lifespan_raw": 2500
+    },
+    {
+      "monster_index": 151,
+      "lifespan_raw": 2590
+    },
+    {
+      "monster_index": 152,
+      "lifespan_raw": 2620
+    },
+    {
+      "monster_index": 153,
+      "lifespan_raw": 2550
+    },
+    {
+      "monster_index": 154,
+      "lifespan_raw": 2440
+    },
+    {
+      "monster_index": 155,
+      "lifespan_raw": 2420
+    },
+    {
+      "monster_index": 156,
+      "lifespan_raw": 2520
+    },
+    {
+      "monster_index": 157,
+      "lifespan_raw": 2590
+    },
+    {
+      "monster_index": 158,
+      "lifespan_raw": 2590
+    },
+    {
+      "monster_index": 159,
+      "lifespan_raw": 2580
+    },
+    {
+      "monster_index": 160,
+      "lifespan_raw": 2600
+    },
+    {
+      "monster_index": 161,
+      "lifespan_raw": 2610
+    },
+    {
+      "monster_index": 162,
+      "lifespan_raw": 2550
+    },
+    {
+      "monster_index": 163,
+      "lifespan_raw": 2680
+    },
+    {
+      "monster_index": 164,
+      "lifespan_raw": 2690
+    },
+    {
+      "monster_index": 165,
+      "lifespan_raw": 2490
+    },
+    {
+      "monster_index": 166,
+      "lifespan_raw": 2560
+    },
+    {
+      "monster_index": 167,
+      "lifespan_raw": 2650
+    },
+    {
+      "monster_index": 168,
+      "lifespan_raw": 2570
+    },
+    {
+      "monster_index": 169,
+      "lifespan_raw": 2550
+    },
+    {
+      "monster_index": 170,
+      "lifespan_raw": 2630
+    },
+    {
+      "monster_index": 171,
+      "lifespan_raw": 2500
+    },
+    {
+      "monster_index": 172,
+      "lifespan_raw": 2540
+    },
+    {
+      "monster_index": 173,
+      "lifespan_raw": 2650
+    },
+    {
+      "monster_index": 174,
+      "lifespan_raw": 2650
+    },
+    {
+      "monster_index": 175,
+      "lifespan_raw": 2640
+    },
+    {
+      "monster_index": 176,
+      "lifespan_raw": 2600
+    },
+    {
+      "monster_index": 177,
+      "lifespan_raw": 2650
+    },
+    {
+      "monster_index": 178,
+      "lifespan_raw": 2660
+    },
+    {
+      "monster_index": 179,
+      "lifespan_raw": 2510
+    },
+    {
+      "monster_index": 180,
+      "lifespan_raw": 2600
+    },
+    {
+      "monster_index": 181,
+      "lifespan_raw": 2620
+    },
+    {
+      "monster_index": 182,
+      "lifespan_raw": 2580
+    },
+    {
+      "monster_index": 183,
+      "lifespan_raw": 2680
+    },
+    {
+      "monster_index": 184,
+      "lifespan_raw": 2620
+    },
+    {
+      "monster_index": 185,
+      "lifespan_raw": 2630
+    },
+    {
+      "monster_index": 186,
+      "lifespan_raw": 2520
+    },
+    {
+      "monster_index": 187,
+      "lifespan_raw": 2500
+    },
+    {
+      "monster_index": 188,
+      "lifespan_raw": 2500
+    },
+    {
+      "monster_index": 189,
+      "lifespan_raw": 2540
+    },
+    {
+      "monster_index": 190,
+      "lifespan_raw": 2640
+    },
+    {
+      "monster_index": 191,
+      "lifespan_raw": 2540
+    },
+    {
+      "monster_index": 192,
+      "lifespan_raw": 2580
+    },
+    {
+      "monster_index": 193,
+      "lifespan_raw": 2570
+    }
+  ]
+}
