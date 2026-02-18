@@ -11,7 +11,7 @@ The Shrine system takes a player-entered text string (up to 8 characters) and de
 1. **Dictionary lookup** -- try to match the password against a hardcoded word table for special monsters
 2. **Hash-based breed determination** -- compute main breed and sub breed from a polynomial hash of the character codes
 3. **Stat delta computation** -- compute stat modifiers from a separate hash of the characters
-4. **Technique assignment** -- assign starting techniques from a hash-indexed table
+4. **Trait assignment** -- assign a starting trait from a hash-indexed table (23 possible traits)
 
 The password is stored as halfword (16-bit) character codes. The sentinel `0xFFFD` marks the end of the string. All computation is purely deterministic -- the same password always produces the same monster.
 
@@ -26,10 +26,10 @@ The password is stored as halfword (16-bit) character codes. The sentinel `0xFFF
 | `0x0801EA6C` | `hash_main_breed` | Polynomial hash → main breed ID |
 | `0x0801E7C8` | `hash_sub_breed` | Polynomial hash → sub breed ID + stat entry index |
 | `0x0801E86C` | `hash_stat_deltas` | Polynomial hash → stat override entry |
-| `0x0801E960` | `hash_techniques` | Polynomial hash → starting techniques |
+| `0x0801E960` | `hash_traits` | Polynomial hash → starting trait (named `hash_techniques` in code for compat) |
 | `0x08020328` | `shrine_create_monster` | State machine handler: init monster from breed struct |
 | `0x08020774` | `monster_init` | Initialize monster from breed record index |
-| `0x08020AB0` | `apply_stat_delta` | Apply stat deltas + techniques from breed struct |
+| `0x08020AB0` | `apply_stat_delta` | Apply stat deltas + trait from breed struct |
 
 ---
 
@@ -175,11 +175,13 @@ The 13-byte stat entry contains:
 
 ### Technique Hash (`0x0801E960`)
 
-For passwords of length <= 2: all technique slots set to `0xFF` (no techniques).
+> **CORRECTION**: Despite the name in early analysis, this function assigns a **trait** (not technique). The function name `hash_techniques` is retained for backward compatibility, but it determines the monster's shrine-assigned trait.
+
+For passwords of length <= 2: all trait slots set to `0xFF` (no trait).
 
 For passwords of length >= 3:
 ```python
-def compute_techniques(char_codes, length):
+def compute_trait(char_codes, length):
     accum = (char_codes[2] + 3) & 0xFFFF  # seed = third char + 3
     for i in range(3, length):
         if i & 1:  # odd: multiply
@@ -188,11 +190,57 @@ def compute_techniques(char_codes, length):
             accum = (sign_extend_16(accum) + (char_codes[i] + i + 1)) & 0xFFFF
     
     index = (accum - 2) & 0xFF  # low byte
-    technique_id = TECHNIQUE_TABLE[index]  # at 0x081EA020
+    trait_id = TRAIT_TABLE[index]  # at 0x081EA020
     
-    # Written to struct offset 0x10 (up to 4 technique slots)
-    return technique_id
+    # Written to struct offset 0x10 (only slot 0; slots 1-3 are 0xFF)
+    return trait_id
 ```
+
+### Password-Assignable Traits
+
+The TRAIT_TABLE at `0x081EA020` (256 bytes) maps hash indices to trait IDs. Only **23 distinct traits** can be assigned by passwords. Many trait IDs (including some of the most desirable ones) never appear in this table and can only come from breed defaults.
+
+| Trait ID | Name | Hash Slots | Notes |
+|----------|------|:----------:|-------|
+| 0x00 | RockSkin | 1 | Physical defense |
+| 0x02 | Tuf Skin | 2 | Physical defense |
+| 0x04 | TufScale | 2 | Physical defense |
+| 0x07 | Up Tail | 2 | Technique boost |
+| 0x08 | Up Claws | 2 | Technique boost |
+| 0x09 | Up Fangs | 2 | Technique boost |
+| 0x0A | Up Hands | 2 | Technique boost |
+| 0x10 | SwtVoice | 2 | Charm/Voice |
+| 0x11 | SwtSmell | 2 | Charm/Voice |
+| 0x12 | Up Charm | 2 | Charm/Voice |
+| 0x13 | BigVoice | 2 | Charm/Voice |
+| 0x23 | UpBreath | 1 | Technique boost |
+| 0x40 | Expert | 1 | Battle performance (rare) |
+| 0x41 | Success | 1 | Battle performance (rare) |
+| 0x42 | Failure | 1 | Battle performance (negative!) |
+| 0x43 | Up Fire | 5 | Elemental |
+| 0x46 | Up Ice | 5 | Elemental |
+| 0x48 | UpLtning | 5 | Elemental |
+| 0x4A | Up Water | 5 | Elemental |
+| 0x4C | Up Wind | 3 | Elemental |
+| 0x4E | Up Earth | 1 | Elemental |
+| 0x50 | Up Mind | 2 | Elemental |
+| 0x52 | Up Magic | 3 | Elemental |
+
+**Notable traits that CANNOT be assigned by passwords:**
+- **IronHart** (0x2C) -- only available as breed default on Zuum/Special
+- **Hi IQ** (0x1F), **Hi Power** (0x1B), **Hi Speed** (0x1E), **Hi Aim** (0x1D) -- stat boost traits
+- **EagleEye** (0x29), **Foresee** (0x28), **Charisma** (0x2E), **Observer** (0x2D)
+- **Satori** (0x2F), **Macho** (0x2B), **Elite** (0x54), **StatKing** (0x56)
+- All "+" elemental variants (UpFire+, UpIce+, etc.)
+
+### Trait Assignment Flow
+
+A shrine monster's final traits come from **two sources**:
+
+1. **Breed defaults** (from monster type record at offset +0x24, up to 4 traits)
+2. **Password trait** (single trait from the hash, added on top)
+
+The `apply_stat_delta` function (`0x08020AB0`) loops through struct offsets `+0x10` to `+0x13`, calling trait assignment (`0x0800D2B0`) for each non-0xFF byte. The password only sets `+0x10`; the breed defaults are set during `monster_init`.
 
 ---
 
@@ -224,7 +272,7 @@ The shrine state machine handler:
    - `struct[7]` → `field_modify(field[5], delta)` → **LIF += delta**
    - `struct[8-13]` → written to fields 0x26-0x2B (growth/trait values)
    - `struct[14]` → `field_modify(field[0x16], delta)` and `field_modify(field[0x17], delta)` (lifespan modifiers)
-5. Learns up to 4 techniques from `struct[0x10-0x13]` (IDs, or 0xFF = no technique)
+5. Assigns up to 4 traits: first from password hash (struct `0x10`), rest from breed defaults. Slots `0x11-0x13` are typically `0xFF` for password monsters, leaving room for breed-default traits only.
 
 ---
 
@@ -240,7 +288,7 @@ The shrine state machine handler:
 
 **Longer passwords produce better monsters because:**
 1. With only 1 character, sub breed is locked to pure breed (40) and stats get no modification
-2. With only 2 characters, no techniques are assigned
+2. With only 2 characters, no trait is assigned
 3. With 3+ characters, all four hashes are fully active
 4. More characters = more mixing in the polynomial hash = wider distribution across the 256-entry breed tables and 64-entry stat table
 5. The stat delta table has entries ranging from **-23 to +25** per stat, so passwords that hash to favorable entries can give significant stat boosts
@@ -303,10 +351,10 @@ These are the **base stats** set by `monster_init()` before password stat deltas
 | 0 (Pixie) | Range | 40-130 | 165-185 | 120-140 | 125-170 | 65-110 | 70-100 | 640-755 |
 | 1 (Golem) | Pure | 170 | 80 | 65 | 50 | 150 | 110 | 625 |
 | 1 (Golem) | Range | 165-195 | 65-135 | 65-90 | 40-70 | 145-220 | 100-115 | 620-780 |
-| 2 (Zuum) | Pure | 115 | 110 | 130 | 130 | 85 | 100 | 670 |
-| 2 (Zuum) | Range | 110-165 | 100-175 | 125-155 | 115-170 | 80-125 | 95-170 | 670-850 |
-| 3 (Suezo) | Pure | 100 | 110 | 140 | 130 | 130 | 120 | 730 |
-| 3 (Suezo) | Range | 95-120 | 100-140 | 130-165 | 120-155 | 120-150 | 110-130 | 730-795 |
+| 2 (Mew) | Pure | 115 | 110 | 130 | 130 | 85 | 100 | 670 |
+| 2 (Mew) | Range | 110-165 | 100-175 | 125-155 | 115-170 | 80-125 | 95-170 | 670-850 |
+| 3 (Mocchi) | Pure | 100 | 110 | 140 | 130 | 130 | 120 | 730 |
+| 3 (Mocchi) | Range | 95-120 | 100-140 | 130-165 | 120-155 | 120-150 | 110-130 | 730-795 |
 | 4 (Dragon) | Pure | 155 | 150 | 115 | 85 | 130 | 120 | 755 |
 | 4 (Dragon) | Range | 155-195 | 125-165 | 110-155 | 75-100 | 110-155 | 100-125 | 720-850 |
 
@@ -342,7 +390,7 @@ LIF = 80 + 8 = 88
 Password Text (up to 8 chars)
     ↓
 [1] Dictionary Lookup (0x08217368)
-    → May set main breed, sub breed, stats, techniques directly
+    → May set main breed, sub breed, stats, trait directly
     → Matched chars replaced with 0xFFFF
     ↓
 [2] Hash Main Breed (if not set by dict)
@@ -358,21 +406,22 @@ Password Text (up to 8 chars)
     → Same hash as sub breed → extract 6-bit index
     → STAT_TABLE[6bit_index] → 13 signed bytes
     ↓
-[5] Hash Techniques (if not set by dict, needs len >= 3)
+[5] Hash Trait (if not set by dict, needs len >= 3)
     → polynomial_hash(chars, start=2) → index & 0xFF
-    → TECHNIQUE_TABLE[index] → up to 4 technique IDs
+    → TRAIT_TABLE[index] → 1 trait ID (23 possible, or 0xFF)
     ↓
 [6] combine_breed_ids(main, sub) → breed record index
     ↓
 [7] monster_init(monster, record_index)
     → memset(monster, 0, 0x594)
     → Copy base stats from 72-byte type record
+    → Breed default traits set (from record +0x24, up to 4)
     ↓
 [8] apply_stat_delta(monster, shrine_struct)
     → Add signed deltas to POW/INT/SKI/SPD/DEF/LIF
     → Set growth/trait modifiers
     → Set lifespan modifier
-    → Learn techniques
+    → Add password trait (from struct +0x10) on top of breed defaults
     ↓
-Monster Ready!
+Monster Ready! (has breed default traits + 1 password trait)
 ```

@@ -117,6 +117,43 @@ Computed by `trait_compute_flags` (0x0800DF80), stored in field 0x4C, used for f
 
 ## Complete Trait Catalog
 
+### Pure Breed Default Traits
+
+Each pure breed (main=sub) has 1-2 default traits assigned during `monster_init`. These are stored in the 72-byte monster type record at offset +0x24 (up to 4 slots, 0xFF = empty).
+
+| Breed | ID | Default Traits |
+|-------|:--:|---------------|
+| Pixie | 0 | SwtSmell (0x11), Up Magic (0x52) |
+| Golem | 1 | RockSkin (0x00) |
+| Mew | 2 | BigVoice (0x13) |
+| Mocchi | 3 | SoftBody (0x05) |
+| Dragon | 4 | Up Fire (0x43) |
+| Arrow Head | 5 | TufShell (0x03) |
+| Suezo | 6 | EagleEye (0x29) |
+| Ducken | 7 | Up Mind (0x50) |
+| Zuum | 8 | Up Tail (0x07) |
+| Tiger | 9 | UpLtning (0x48), Up Claws (0x08) |
+| Naga | 10 | Up Claws (0x08) |
+| Octopee | 11 | Up Water (0x4A) |
+| Mogi | 12 | Up Dance (0x25) |
+| Psiroller | 13 | Up Earth (0x4E) |
+| Durahan | 14 | TufArmor (0x01) |
+| Joker | 15 | Up Magic (0x52) |
+| Momo | 16 | Up Tail (0x07) |
+| Lesione | 17 | Up Water (0x4A) |
+| Zan | 18 | Up Claws (0x08), Up Magic (0x52) |
+| Antlan | 19 | Tuf Skin (0x02), Up Fists (0x20) |
+| Hare | 20 | Foresee (0x28) |
+| Suzurin | 21 | MagicGrd (0x06) |
+| Henger | 22 | TufArmor (0x01) |
+| Raiden | 23 | Up Claws (0x08) |
+| Gitan | 24 | Up Magic (0x52) |
+| Gali | 25 | MagicGrd (0x06) |
+| Doodle | 26 | Failure (0x42) |
+| Monol | 27 | RockSkin (0x00) |
+| Phoenix | 28 | Up Fire (0x43) |
+| Garu | 29 | Up Fangs (0x09) |
+
 ### Body/Defense Traits (0x00-0x05)
 
 Reduce damage taken from physical attacks. All share identical effects: -5 to attack (body part categories 1,2) and -5 to charm (category 11).
@@ -143,7 +180,7 @@ Boost specific technique types. Pattern: +5 power, +5 alt power, -3 defense, -3 
 | 0x07 | Up Tail | 5 | Tail attacks |
 | 0x08 | Up Claws | 0 | Claw attacks |
 | 0x09 | Up Fangs | 1 | Bite attacks |
-| 0x0A | Up Horns | 8 | Horn attacks |
+| 0x0A | Up Hands | 6 | Hand attacks (password-assignable) |
 | 0x0B | Up Sword | 4 | Sword attacks (flags: 0x4000) |
 | 0x0C | UpScythe | 4 | Scythe attacks (flags: 0x8000) |
 | 0x0D | Up Spear | 4 | Spear attacks (flags: 0x01000000) |
@@ -461,3 +498,71 @@ Trait names and descriptions use uint16 (little-endian) per character:
 - 0x0048: (
 - 0x004E: '
 - 0x0051: '  (apostrophe variant)
+
+## Verified Trait ID → Name Mapping
+
+The following mapping was verified by cross-referencing ROM breed records (offset +0x24 default traits) against the LegendCup community breed database (492 breed entries). IDs marked with `*` are also assignable via shrine passwords.
+
+| ID | Name | Verified Source | Password? |
+|----|------|-----------------|:---------:|
+| 0x00 | RockSkin | Golem, Monol pure breed default | * |
+| 0x01 | TufArmor | Durahan, Henger pure breed default | |
+| 0x02 | Tuf Skin | Antlan pure breed default, Pixie/Dragon | * |
+| 0x03 | TufShell | Arrow Head pure breed default | |
+| 0x04 | TufScale | Zuum/Naga, Octopee/Naga | * |
+| 0x05 | SoftBody | Mocchi pure breed default | |
+| 0x06 | MagicGrd | Suzurin, Gali pure breed default | |
+| 0x07 | Up Tail | Zuum, Momo pure breed default | * |
+| 0x08 | Up Claws | Tiger, Naga, Zan, Raiden pure breed default | * |
+| 0x09 | Up Fangs | Garu pure breed default | * |
+| 0x0A | Up Hands | Not a breed default (password-only) | * |
+| 0x0B | Up Sword | Durahan sub-breeds | |
+| 0x0C | UpScythe | Joker sub-breeds | |
+| 0x0D | Up Spear | Antlan sub-breeds | |
+| 0x10 | SwtVoice | Pixie/Suezo, others | * |
+| 0x11 | SwtSmell | Pixie pure breed default | * |
+| 0x12 | Up Charm | Pixie/Mocchi, others | * |
+| 0x13 | BigVoice | Mew pure breed default | * |
+| 0x14 | Swt Hips | Mew/Mogi, others | |
+| 0x15 | Sunshine | Flag bit 10, weather training | |
+| 0x17 | LuckStar | Mew/Joker, others | |
+| 0x18 | Popular | Flag bit 12, fan system | |
+| 0x1A | Charm | Flag bit 23, adventure items | |
+| 0x1D | Hi Aim | Ducken/Special (deduced) | |
+| 0x1E | Hi Speed | Psiroller/Special (deduced) | |
+| 0x1F | Hi IQ | Pixie/Henger, others | |
+| 0x20 | Up Fists | Antlan pure breed default | |
+| 0x21 | Up Feet | Mew/Hare, others | |
+| 0x23 | UpBreath | Naga/Mew (deduced) | * |
+| 0x24 | Up Head | Dragon sub-breeds | |
+| 0x25 | Up Dance | Mogi pure breed default | |
+| 0x26 | Up Shot | Suezo sub-breeds | |
+| 0x27 | SureHeal | Mew/Ducken, others | |
+| 0x28 | Foresee | Hare pure breed default | |
+| 0x29 | EagleEye | Suezo pure breed default | |
+| 0x2B | Macho | Golem/Tiger, others | |
+| 0x2C | IronHart | Zuum/Special only (very rare) | |
+| 0x2D | Observer | Mew/Suezo, others | |
+| 0x2E | Charisma | Tiger/Dragon, others | |
+| 0x2F | Satori | N/A | |
+| 0x30 | Glutton | Octopee/Special (deduced) | |
+| 0x40 | Expert | Not a breed default (password-only) | * |
+| 0x41 | Success | Not a breed default (password-only) | * |
+| 0x42 | Failure | Doodle pure breed default | * |
+| 0x43 | Up Fire | Dragon, Phoenix pure breed default | * |
+| 0x46 | Up Ice | Various sub-breeds | * |
+| 0x48 | UpLtning | Tiger pure breed default | * |
+| 0x4A | Up Water | Octopee, Lesione pure breed default | * |
+| 0x4C | Up Wind | Various sub-breeds | * |
+| 0x4E | Up Earth | Psiroller pure breed default | * |
+| 0x50 | Up Mind | Ducken pure breed default | * |
+| 0x52 | Up Magic | Pixie, Joker, Zan, Gitan breed default | * |
+
+### Trait Sources for Shrine Monsters
+
+A shrine-generated monster gets traits from exactly two sources:
+
+1. **Breed defaults** (from the 72-byte monster type record at offset +0x24, up to 4 traits)
+2. **Password trait** (1 trait from the polynomial hash, via TRAIT_TABLE at 0x081EA020)
+
+Only 23 of the 87 traits appear in the TRAIT_TABLE. The rest can only be obtained through breed defaults, combining, or gameplay events. Notable absent traits include IronHart, all Hi-Stat traits (except via breed defaults), EagleEye, Foresee, Charisma, Observer, Satori, Macho, Elite, and StatKing.

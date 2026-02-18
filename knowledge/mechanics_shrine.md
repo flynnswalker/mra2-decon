@@ -17,7 +17,7 @@ The game computes **four separate hashes** from the same password, each starting
 | Hash 1 | char[0] | Multiply | Main breed determination |
 | Hash 2 | char[1] | Add (flipped parity) | Sub breed determination |
 | Hash 3 | char[1] | Same as Hash 2 | Stat delta selection |
-| Hash 4 | char[2] | Multiply | Technique selection |
+| Hash 4 | char[2] | Multiply | Trait selection (1 of 23 possible traits) |
 
 The algorithm alternates between multiplication and addition at each character position:
 - On **multiply** steps: `accumulator *= (char_value + index + 1)`

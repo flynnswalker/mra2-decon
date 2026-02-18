@@ -104,6 +104,14 @@
 ### Shrine: Polynomial Hash Password System
 
 **Key findings:**
+- 4 polynomial hashes (main breed, sub breed, stat deltas, trait) from same password
+- Hash 4 assigns a **trait** (not technique as originally labeled) -- only **23 of 87 traits** are password-assignable
+- **IronHart** (0x2C) is NOT password-assignable -- only appears as breed default on Zuum/Special
+- Breed default traits (from monster type record +0x24) are assigned separately during `monster_init`
+- Final shrine monster = breed defaults + 1 password trait
+- TRAIT_NAMES mapping verified against LegendCup community data (492 breed entries cross-referenced with ROM)
+
+**Key findings:**
 - **4 separate hashes** from one password (alternating multiply/add per character)
 - **256-entry lookup tables** for breed determination
 - **64-entry stat delta table** for starting stat variation (-23 to +25 per stat)
@@ -132,6 +140,8 @@
 | Traits reset during training | Not widely known | New finding |
 | 87 decoded traits with 6 effect types | Partial community lists | Extended + quantified |
 | 27 Legendary combining recipes | Partially known | Fully decoded |
+| Only 23 traits assignable by passwords | Not documented | New finding |
+| Breed default traits at record +0x24 | Not documented | New finding |
 | Password polynomial hash algorithm | Black box | Fully decoded |
 
 ---

@@ -1120,6 +1120,8 @@ def list_breeds():
     print(f"  {'ID':>2s}  {'Name':<12s}  {'Hash Freq':>9s}  Valid Sub Breeds")
     print(f"  {'-'*2}  {'-'*12}  {'-'*9}  {'-'*40}")
     for bid, bname in sorted(BREED_NAMES.items()):
+        if bid >= len(BREED_COMBO_MATRIX):
+            continue
         count = sum(1 for v in MAIN_BREED_TABLE if v == bid)
         # Find valid sub breeds
         valid_subs = []
