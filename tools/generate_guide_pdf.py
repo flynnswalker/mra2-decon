@@ -119,20 +119,35 @@ def build_pdf():
     # --- QUICK REFERENCE ---
     pdf.add_page()
     pdf.section_title("Quick Reference")
-    pdf.body("This guide covers four core systems extracted from the MRA2 ROM. Here's the one-sentence summary for each:")
-    pdf.ln(2)
+    pdf.body("This guide covers 10 game systems extracted from the MRA2 ROM. One-sentence summaries:")
+    pdf.ln(1)
 
-    pdf.bold_body("Training & Raising")
-    pdf.body("Your monster's stat gains are determined by your coach's quality, your breed's hidden growth curve (early/late bloomer), and your monster's age. Drills are free; sparring costs 3-5 weeks of lifespan per session.")
+    pdf.bold_body("Training")
+    pdf.body("Light Drills have equal stat weights; Heavy Drills skew toward POW/DEF/LIF. Stat gains come from pattern-matching minigame results. Drills are free; sparring costs 3-5 weeks of lifespan.")
 
     pdf.bold_body("Battle")
-    pdf.body("Battle outcomes are decided by hidden type matchups, stat gaps (only gaps > 100 matter), guts level, loyalty, level difference, and whether a technique was used (1.5x multiplier). Missing costs -4 guts, creating death spirals.")
+    pdf.body("Deterministic 8-phase scoring (no RNG). Stat gaps under 100 contribute nothing. Techniques give 1.5x. Missing costs -4 guts, creating death spirals.")
 
-    pdf.bold_body("Lifespan & Aging")
-    pdf.body("All breeds live 237-280 weeks (only 18% variance). Growth peaks at different times depending on your breed's curve type. Sparring is the main lifespan drain. Regular drills are basically free.")
+    pdf.bold_body("Lifespan & Fatigue")
+    pdf.body("All breeds live 237-280 weeks. Growth peaks at different ages per breed. Weekly drain is 400-500 pts + random. Trait 0x33 (Listless) adds 50% more drain. Older monsters tire 3x faster.")
 
-    pdf.bold_body("Combining (Breeding)")
-    pdf.body("Offspring stats = parent stats + a percentage bonus based on stress tier and breed bonus. Breed bonus (+10) matters far more than stress tier. Rest parents before combining. Both need technique proficiency > 48 to pass on moves.")
+    pdf.bold_body("Sparring & Techniques")
+    pdf.body("Technique learning is DETERMINISTIC (35 condition checks, not random). 'Good Chance' means most conditions met. Sparring stat gain = current_stat minus breed base. AGIMA stats are display-only.")
+
+    pdf.bold_body("Traits")
+    pdf.body("87 traits with 6 effect types. StatKing gives +50 to all battle stats. Listless adds 50% lifespan drain. Element traits give +/-3 or +/-5 damage. Traits reset to 0 during weekly training.")
+
+    pdf.bold_body("Items & Food")
+    pdf.body("76 items decoded. Food reduces fatigue/stress. Supplements are breed-indexed (same item differs per breed). Gems passively offset weekly drain. Feed your monster the correct food type (1-5).")
+
+    pdf.bold_body("Combining")
+    pdf.body("30x40 breed matrix. Offspring starts from breed base stats (NOT parent stats), modified by compatibility %. 27 Legendary recipes. Fureria/Gadamon/Buragma give +10% to 2 stats.")
+
+    pdf.bold_body("Tournaments & Rank")
+    pdf.body("Ranks E through S with monthly decay. Opponents cap at 250 stats. Stray encounters need stat_total > 499 and rank_points > 699.")
+
+    pdf.bold_body("Shrine / Passwords")
+    pdf.body("Polynomial hash: 4 hashes from one password. 256-entry breed tables, 64-entry stat delta table. Longer passwords = better hash distribution. Dictionary table for known words.")
 
     # ==========================================
     # TRAINING
@@ -335,32 +350,223 @@ def build_pdf():
     pdf.body("Both parents must have technique proficiency above 48. If either is below, no techniques carry over. Make sure both parents have enough sparring/battle experience before combining.")
 
     # ==========================================
+    # FATIGUE, STRESS & FOOD
+    # ==========================================
+    pdf.add_page()
+    pdf.section_title("Fatigue, Stress & Food")
+
+    pdf.sub_title("Fatigue Accumulation")
+    pdf.body("Fatigue (0-100%) increases every week. Older monsters tire much faster:")
+
+    w = [40, 42, 45]
+    pdf.table_row(["Monster Age", "Extra Fatigue/Wk", "Total/Wk"], w, bold=True)
+    pdf.table_row(["Young (400+)", "None", "+1"], w)
+    pdf.table_row(["Mid (300-399)", "+1 (25% chance)", "+1 to +2"], w)
+    pdf.table_row(["Older (200-299)", "+1 (50% chance)", "+1 to +2"], w)
+    pdf.table_row(["Old (100-199)", "+1 always", "+2"], w)
+    pdf.table_row(["Elderly (0-99)", "+2 always", "+3"], w)
+
+    pdf.ln(1)
+    pdf.callout("Older monsters fatigue 3x faster. This creates a downward spiral in their final weeks.")
+
+    pdf.sub_title("Stress: The Sneaky Stat")
+    pdf.body("Stress (0-100) increases by +1 every REST week. This is counterintuitive -- idle monsters get bored. Active weeks (training, tournaments) do NOT add stress through this path.")
+    pdf.body("Stress is critical for combining: 0-19 = Excellent offspring quality, 80-100 = Terrible.")
+    pdf.callout("Keep monsters active. Use items to reduce stress before combining.")
+
+    pdf.sub_title("Happiness Drain by Loyalty")
+    pdf.body("High-loyalty monsters need MORE attention. Weekly happiness drain:")
+
+    w = [36, 45, 46]
+    pdf.table_row(["Loyalty", "Drain/Week", "Meaning"], w, bold=True)
+    pdf.table_row(["Very Disloyal", "30-50", "Low maintenance"], w)
+    pdf.table_row(["Neutral", "90-110", "Moderate need"], w)
+    pdf.table_row(["Very Loyal", "130-150", "High maintenance"], w)
+    pdf.table_row(["Extremely Loyal", "150-200", "Very needy"], w)
+
+    pdf.sub_title("Food Preferences")
+    pdf.body("Each breed has a food preference (1-5), evenly distributed. Correct food provides a weekly bonus that offsets lifespan drain. Wrong food gives nothing. Feed items reduce fatigue/stress directly:")
+    pdf.bullet("HonCandy (200g): Fatigue -30")
+    pdf.bullet("MntCandy (800g): Fatigue -50, Stress -100")
+    pdf.bullet("Oily Oil (1000g): Fatigue -128 (massive)")
+
+    # ==========================================
+    # SPARRING & TECHNIQUE LEARNING
+    # ==========================================
+    pdf.add_page()
+    pdf.section_title("Sparring & Techniques")
+
+    pdf.sub_title("Technique Learning Is Deterministic")
+    pdf.callout("The biggest community misconception: technique learning is NOT random. There is no dice roll. It's a series of 35 condition checks.")
+    pdf.body("When a coach can teach a technique, the game checks: Is it already known? Is the breed eligible? Is the specific learn condition met? Is there an empty slot?")
+    pdf.body("The 35 conditions include stat comparisons, stat ratios, win records, and stat thresholds. If ALL pass, the technique is learned 100% of the time.")
+    pdf.body("'Good Chance' and 'Highly Unlikely' are proximity indicators -- how close you are to meeting the conditions, not probability percentages.")
+
+    pdf.sub_title("Sparring Stat Gains")
+    pdf.body("Sparring stat deltas are calculated at coach hiring time:")
+    pdf.formula_box("weekly_delta = monster_current_stat - breed_base_stat\nclamped to [-128, +127]")
+    pdf.body("If your monster's stat is ABOVE the breed base, you gain. If BELOW, you LOSE stats. This strongly supports 'train stats first, spar later.'")
+    pdf.callout("AGIMA teacher stats are display-only. They do NOT affect your actual stat gains from sparring.")
+
+    pdf.sub_title("275 Techniques Decoded")
+    pdf.body("30 breeds x 10 slots. Each technique has: damage (9-56), accuracy (24-80), guts cost (30-60), sharpness (0-45), status effect, range, force type (POW/INT/Both), and multi-hit (1-3).")
+    pdf.body("Sharpness replaces 'crit' -- higher sharpness biases outcomes toward Strong/Overwhelming tiers rather than being a separate crit roll.")
+
+    # ==========================================
+    # TRAITS
+    # ==========================================
+    pdf.add_page()
+    pdf.section_title("Traits / Characteristics")
+
+    pdf.sub_title("87 Traits with 6 Effect Types")
+    pdf.body("Each monster has 6 trait slots. Traits are checked via linear search at runtime.")
+
+    pdf.sub_sub_title("Best Traits")
+    w = [30, 40, 57]
+    pdf.table_row(["Trait", "Effect", "Impact"], w, bold=True)
+    pdf.table_row(["StatKing", "+50 all battle stats", "Best trait in game"], w)
+    pdf.table_row(["Dignity", "+30 all battle stats", "Second best"], w)
+    pdf.table_row(["Fire/Ice/etc", "+3 or +5 element dmg", "Good for specialists"], w)
+    pdf.table_row(["Up Claws/Tail", "+3 body part dmg", "Technique boost"], w)
+
+    pdf.sub_sub_title("Worst Traits")
+    w = [30, 40, 57]
+    pdf.table_row(["Trait", "Effect", "Impact"], w, bold=True)
+    pdf.table_row(["Listless", "+50% lifespan drain", "Kills monster fast"], w)
+    pdf.table_row(["Lazy/Slump", "Training gain = -25", "Wastes training"], w)
+    pdf.table_row(["Worn Out", "Aging stage locked=1", "Stunted growth forever"], w)
+    pdf.table_row(["GlssHart", "Stress/mood penalty", "Everywhere"], w)
+
+    pdf.ln(1)
+    pdf.callout("Traits reset to 0 during weekly training ticks. Trait development comes from battle, errantry, and events -- not from training.")
+
+    # ==========================================
+    # ITEMS & EXPEDITIONS
+    # ==========================================
+    pdf.add_page()
+    pdf.section_title("Items & Expeditions")
+
+    pdf.sub_title("Key Items")
+    pdf.body("76 total items. Supplements are breed-indexed (same item differs per breed).")
+
+    w = [30, 18, 79]
+    pdf.table_row(["Item", "Cost", "Effect"], w, bold=True)
+    pdf.table_row(["StarPrune", "N/A", "Major stat boost (+7, +1)"], w)
+    pdf.table_row(["MeatSlab", "1000g", "Large stat boost (+10)"], w)
+    pdf.table_row(["DietWeed", "1000g", "Weight loss (-7)"], w)
+    pdf.table_row(["ShinyGem", "10000g", "Passive weekly drain offset"], w)
+    pdf.table_row(["BrghtGem", "65000g", "Best passive drain offset"], w)
+    pdf.table_row(["Fureria", "N/A", "Combining: DEF+LIF +10%"], w)
+    pdf.table_row(["Gadamon", "N/A", "Combining: POW+INT +10%"], w)
+    pdf.table_row(["Buragma", "N/A", "Combining: SPD+ACC +10%"], w)
+
+    pdf.sub_title("Expeditions")
+    pdf.body("16 areas from 2000g to 32500g cost. Duration depends on INT:")
+    pdf.bullet("INT 0-400: 24 weeks away")
+    pdf.bullet("INT 401-600: 16 weeks")
+    pdf.bullet("INT 600+: 8 weeks")
+    pdf.body("Loot requires stat thresholds (>499 and >699). Stress decreases -2/week during expeditions. Special encounters at high scores can award rare items.")
+
+    # ==========================================
+    # TOURNAMENTS & RANK
+    # ==========================================
+    pdf.add_page()
+    pdf.section_title("Tournaments & Rank")
+
+    pdf.sub_title("Rank Progression")
+    pdf.body("Ranks E(0) through S(5). Rank-up at month end. Monthly decay based on current value:")
+
+    w = [35, 30, 62]
+    pdf.table_row(["Current Points", "Monthly Decay", "Notes"], w, bold=True)
+    pdf.table_row(["300-499", "-2", "Mild decay"], w)
+    pdf.table_row(["500-699", "-6", "Moderate decay"], w)
+    pdf.table_row(["700-899", "-12", "Heavy decay"], w)
+    pdf.table_row(["900+", "-20", "Must keep winning"], w)
+
+    pdf.sub_title("Tournament Rewards")
+    pdf.body("Per victory: +140 to +160 stat total, +120-140g money, -1 fatigue. Rank points +160 to +384. Prize money scales with fame tier (20-133g per match).")
+    pdf.body("Opponents cap at 250 per stat -- well below a trained monster's 999 ceiling.")
+
+    pdf.sub_title("Stray Encounters")
+    pdf.body("Require stat_total > 499 AND rank_points > 699. Score determines tier: common at 1000+, rare at 1400+. Rare encounters have 1-in-3 chance of special event with item rewards.")
+
+    # ==========================================
+    # SHRINE / PASSWORDS
+    # ==========================================
+    pdf.add_page()
+    pdf.section_title("Shrine / Passwords")
+
+    pdf.sub_title("The Password Algorithm")
+    pdf.body("The shrine computes 4 polynomial hashes from your password. Each hash alternates multiply and add operations per character position:")
+    pdf.formula_box("Even step: accumulator += (char + index + 1)\nOdd step:  accumulator *= (char + index + 1)\nFinal:     hash = accumulator & 0xFF")
+    pdf.body("The 4 hashes determine: main breed (256 entries), sub breed (256 entries), stat deltas (64 entries), and technique selection.")
+
+    pdf.sub_title("Password Length Matters")
+    w = [25, 50, 52]
+    pdf.table_row(["Length", "What's Active", "Quality"], w, bold=True)
+    pdf.table_row(["1 char", "Pure breed, zero deltas", "Worst"], w)
+    pdf.table_row(["2 chars", "Breed + stat deltas", "Better"], w)
+    pdf.table_row(["3+ chars", "Full system + techs", "Best"], w)
+
+    pdf.ln(1)
+    pdf.body("Community password databases work because there's a dictionary table at 0x08217368 that maps specific words to predetermined monsters, bypassing the hash entirely.")
+
+    pdf.sub_title("Stat Delta Range")
+    pdf.body("The 64-entry stat delta table adds -23 to +25 per stat on top of breed base. Best entry adds +66 total stats. Breed base stats (40-175 per stat) matter far more than the password delta.")
+
+    # ==========================================
+    # COMMUNITY CORRECTIONS
+    # ==========================================
+    pdf.add_page()
+    pdf.section_title("Community Corrections")
+    pdf.body("Findings from ROM analysis that contradict common community beliefs:")
+    pdf.ln(1)
+
+    pdf.bold_body("'Technique learning is probabilistic'")
+    pdf.body("WRONG. It's 35 deterministic condition checks. No PRNG call exists in the learning path. 'Good Chance' means most conditions met, not 75%.")
+
+    pdf.bold_body("'AGIMA stats affect training gains'")
+    pdf.body("WRONG. AGIMA stats are display-only for the coach selection UI. Sparring stat delta = your_stat - breed_base_stat.")
+
+    pdf.bold_body("'Offspring inherit parent stats directly'")
+    pdf.body("WRONG. Offspring starts from breed base stats, modified by a compatibility percentage. Parents contribute indirectly through compatibility scoring.")
+
+    pdf.bold_body("'Rest reduces stress'")
+    pdf.body("PARTIALLY WRONG. Stress actually increases by +1 every rest week (boredom). Training/tournament weeks do NOT add stress. Items reduce stress directly.")
+
+    pdf.bold_body("'High loyalty is always good'")
+    pdf.body("NUANCED. High loyalty increases the Phase 3 battle modifier, but also increases weekly happiness drain by 3-7x. High-loyalty monsters need more food/attention to maintain happiness.")
+
+    # ==========================================
     # MODDING CHEAT SHEET
     # ==========================================
     pdf.add_page()
     pdf.section_title("Modding Cheat Sheet")
-    pdf.body("High-impact balance changes that can be made by editing ROM data:")
+    pdf.body("High-impact balance changes via ROM editing:")
 
-    pdf.sub_title("Training Balance")
-    pdf.bullet("Change coach stat totals to buff/nerf specific coaches")
-    pdf.bullet("Change sparring fatigue costs (27-45) to make technique learning cheaper")
-    pdf.bullet("Set all fatigue to 0 to remove lifespan drain entirely")
+    pdf.sub_title("Training")
+    pdf.bullet("Coach stat totals: buff/nerf coaches")
+    pdf.bullet("Sparring fatigue (27-45): lower for cheaper technique learning")
+    pdf.bullet("Light/Heavy drill weights: rebalance stat distribution")
 
-    pdf.sub_title("Battle Balance")
-    pdf.bullet("Reduce the 100-point stat dead zone (e.g., to 50) to reward balanced builds")
-    pdf.bullet("Reduce miss penalty from -4 to -2 guts for less ACC dominance")
-    pdf.bullet("Reduce technique multiplier from 1.5x to 1.2x")
-    pdf.bullet("Edit the type matchup grid to rebalance breed advantages")
+    pdf.sub_title("Battle")
+    pdf.bullet("100-point dead zone: lower to reward balanced builds")
+    pdf.bullet("Miss penalty (-4 guts): reduce for less ACC dominance")
+    pdf.bullet("Technique 1.5x multiplier: tune down for less tech dependency")
+    pdf.bullet("Type matchup grid: rebalance breed advantages")
+    pdf.bullet("Guts regen timers: adjust SPD-based recovery rates")
 
-    pdf.sub_title("Lifespan Balance")
-    pdf.bullet("Multiply all breed lifespans (e.g., x2) for more forgiving gameplay")
-    pdf.bullet("Flatten growth curves so all breeds grow evenly at any age")
-    pdf.bullet("Halve sparring costs so technique learning is less punishing")
+    pdf.sub_title("Lifespan & Fatigue")
+    pdf.bullet("Breed lifespans: multiply for more forgiving gameplay")
+    pdf.bullet("Growth curves: flatten for even growth at any age")
+    pdf.bullet("Age-based fatigue: reduce elderly penalty for longer useful life")
+    pdf.bullet("Loyalty drain table: reduce to make happiness easier")
 
-    pdf.sub_title("Combining Balance")
-    pdf.bullet("Raise the 255 stat cap for deeper multi-generation breeding")
-    pdf.bullet("Adjust breed bonuses to change which combinations are optimal")
-    pdf.bullet("Lower technique proficiency threshold (from 48) for easier tech inheritance")
+    pdf.sub_title("Combining & Traits")
+    pdf.bullet("255 stat cap: raise for deeper multi-gen breeding")
+    pdf.bullet("Breed combination matrix: change available offspring")
+    pdf.bullet("Legendary recipes: add/modify the 27 special combinations")
+    pdf.bullet("Trait effect values: tune StatKing +50, Listless 1.5x, etc.")
 
     pdf.ln(4)
     pdf.set_font("Helvetica", "I", 9)
