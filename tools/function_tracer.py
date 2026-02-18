@@ -40,18 +40,39 @@ KNOWN_FUNCTIONS = {
     0x08002B28: "combine_breed_ids(main, sub)",
     0x080035BC: "field_read(base, field_idx, arr_idx)",
     0x080035D0: "field_write(base, field_idx, value, arr_idx)",
+    0x080035E4: "field_modify(base, field_idx, delta, arr_idx)",
     0x08002240: "core_state_accessor(...)",
     0x08002B88: "resolve_ptr_16(index)",
     0x08002B9C: "resolve_ptr_32(index)",
     0x081C7D0C: "memcpy(dst, src, len)",
     0x081C7C24: "divmod(a, b)",
-    0x081C79D4: "multiply(a, b)",
+    0x081C79D4: "__aeabi_idiv(a, b)",
     0x081C770C: "memset(dst, val, len)",
+    0x0806354C: "prng()",
+    0x08020AB0: "apply_stat_delta(...)",
+    0x08020328: "weekly_training_step(...)",
+    0x08020774: "monster_init(...)",
+    0x0805FB5C: "breeding_main(parentA, parentB, item, output, ...)",
+    0x0805B09C: "breeding_entry(context)",
+    0x080603D4: "breed_candidate_dispatcher(parentA, parentB, item, output)",
+    0x0805FF28: "compatibility_score(parentA, parentB)",
+    0x08060694: "combining_item_effects(offspring, item_id)",
+    0x080605F0: "recipe_condition_check(parentA, parentB, recipe)",
+    0x080021B0: "compute_nature_value(parentA, parentB, offspring)",
+    0x0800D2B0: "learn_technique(monster, tech_id, slot)",
+    0x08029E54: "apply_breed_data(monster, breed_data_table)",
+    0x08060718: "copy_technique_ancestry(src_monster, dest_buffer)",
 }
 
 KNOWN_ADDRESSES = {
     0x081CACC8: "MONSTER_TYPE_TABLE",
     0x081E88C0: "BREED_COMBO_TABLE",
+    0x081E9224: "BREED_TYPE_AFFINITY_TABLE",
+    0x081F188C: "LEGENDARY_RECIPE_TABLE",
+    0x081F1D94: "COMBINING_ITEM_EFFECTS_TABLE",
+    0x081E9224: "BREED_TYPE_AFFINITY_TABLE",
+    0x081F188C: "LEGENDARY_RECIPE_TABLE",
+    0x081F1D94: "COMBINING_ITEM_EFFECTS_TABLE",
     0x081C9F80: "STAT_GROWTH_TABLE",
     0x081D3CCC: "VARIANT_DATA_TABLE",
     0x082006F8: "STRING_TABLE",
@@ -149,7 +170,7 @@ def disassemble_function(
                 if target:
                     inst.call_name = KNOWN_FUNCTIONS.get(target)
                     # Annotate field accessor calls
-                    if target in (0x080035BC, 0x080035D0) and schema:
+                    if target in (0x080035BC, 0x080035D0, 0x080035E4) and schema:
                         inst.comment = _annotate_field_call(
                             instructions, insn.address, target, schema
                         )
